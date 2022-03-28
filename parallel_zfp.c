@@ -125,10 +125,12 @@ int main(int argc, char* argv[]) {
     double absbound[100];
 
     //Begin modify this part
-    int num_vars = 4;
-    char* file_folder = "/lcrc/project/ECP-EZ/public/compression/hasan-datasets/";
-    char file[4][100] = {"baryon_density.f32.bin.log.dat", "dark_matter_density.f32.bin.log.dat", "temperature.f32.bin.log.dat", "velocity_x.f32.bin"};
-    size_t r5 = 0, r4 = 0, r3 = 512, r2 = 512, r1 = 512;
+    int num_vars = 7;
+    char* file_folder = "/lcrc/project/ECP-EZ/public/compression/datasets/0";
+    char file[7][100] = {"velocityy_truncated.bin.dat", "velocityx_truncated.bin.dat", "density_truncated.bin.dat",
+                                "pressure_truncated.bin.dat", "velocityz_truncated.bin.dat", "viscocity_truncated.bin.dat",
+                                "diffusivity_truncated.bin.dat"};
+    size_t r5 = 0, r4 = 0, r3 = 256, r2 = 384, r1 = 384;
     absbound[0] = atof(argv[1]);
     absbound[1] = atof(argv[2]);
     absbound[2] = atof(argv[3]);
@@ -204,10 +206,10 @@ int main(int argc, char* argv[]) {
         free(bytesOut);
     }
     struct stat st = {0};
-    if (stat("/lcrc/globalscratch/zhaok", &st) == -1) {
-        mkdir("/lcrc/globalscratch/zhaok", 0777);
+    if (stat("/lcrc/globalscratch/jinyang", &st) == -1) {
+        mkdir("/lcrc/globalscratch/jinyang", 0777);
     }
-    sprintf(zip_filename, "%s/zfp_%d_%d.out", "/lcrc/globalscratch/zhaok", folder_index, rand());  // Write Compressed Data
+    sprintf(zip_filename, "%s/zfp_%d_%d.out", "/lcrc/globalscratch/jinyang", folder_index, rand());  // Write Compressed Data
 
     size_t total_size = compressed_output_pos - compressed_output;
     // Write Compressed Data

@@ -15,7 +15,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "sz_autotuning_3d.hpp"
+#include "decompose.hpp"
+#include "recompose.hpp"
 #include "rw1.h"
 #include "mpi.h"
 
@@ -112,7 +113,7 @@ int main(int argc, char * argv[])
         for (int i = 0; i < num_vars; i++) strcpy(file[i], miranda_file[i]);
         rel_bound = miranda_rel_bound;
     } else {
-        printf("No such variablem, exit\n");
+        printf("No such variable, exit\n");
 //        SZ_Finalize();
         MPI_Finalize();
         return 0;
@@ -132,8 +133,12 @@ int main(int argc, char * argv[])
 	unsigned char * compressed_output = (unsigned char *) malloc(est_compressed_size);
 	unsigned char * compressed_output_pos = compressed_output;
 	int folder_index = world_rank;
+    
+    std::vector<size_t> dims={r3,r2,r1};
+
 	for(int i=0; i<num_vars; i++){
 		sprintf(filename, "%s/%d/%s", folder, folder_index, file[i]);
+        conf.relErrorBound = rel_bound[i];
 		// Read Input Data
 		if(world_rank == 0){
 			start = MPI_Wtime();
@@ -162,8 +167,9 @@ int main(int argc, char * argv[])
 		if (world_rank == 0) printf ("Compressing %s\n", filename);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0) start = MPI_Wtime();
+        MGARD::Decomposer<float> decomposer(1);
 
-        unsigned char *bytesOut = sz_compress_autotuning_3d<float>(dataIn, r3, r2, r1, rel_bound[i], compressed_size[i]);
+        unsigned char *bytesOut = decomposer.compress(dataIn, dims,3,rel_bound[i],&compressed_size[i]);
 //		unsigned char *bytesOut = SZ_compress_args(SZ_FLOAT, dataIn, &compressed_size[i], REL, 0, rel_bound[i], 0, r5, r4, r3, r2, r1);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0){
@@ -176,10 +182,10 @@ int main(int argc, char * argv[])
 		free(bytesOut);
 	}
     struct stat st = {0};
-    if (stat("/lcrc/globalscratch/kazhao", &st) == -1) {
-        mkdir("/lcrc/globalscratch/kazhao", 0777);
+    if (stat("/lcrc/globalscratch/jinyang", &st) == -1) {
+        mkdir("/lcrc/globalscratch/jinyang", 0777);
     }
-    sprintf(zip_filename, "%s/kai_%d_%d.out", "/lcrc/globalscratch/kazhao", folder_index, rand());	// Write Compressed Data
+    sprintf(zip_filename, "%s/mgx_%d_%d.out", "/lcrc/globalscratch/jinyang", folder_index, rand());	// Write Compressed Data
     size_t total_size = compressed_output_pos - compressed_output;
 	// Write Compressed Data
 	MPI_Barrier(MPI_COMM_WORLD);
@@ -216,8 +222,9 @@ int main(int argc, char * argv[])
         MPI_Barrier(MPI_COMM_WORLD);
         if (world_rank == 0) printf("decompress %d-th field\n", i);
         if(world_rank == 0) start = MPI_Wtime();
-        float *dataOut = sz_decompress_autotuning_3d<float>(compressed_output_pos, compressed_size[i], r3, r2, r1);
-//        float *dataOut = SZ_decompress(SZ_FLOAT, compressed_output_pos, compressed_size[i], r5, r4, r3, r2, r1);
+        MGARD::Recomposer<float> recomposer;
+        float *dataOut = recomposer.decompress(compressed_output_pos, compressed_size[i],dims);
+//        float *dataOut = SZ_decomprescs(SZ_FLOAT, compressed_output_pos, compressed_size[i], r5, r4, r3, r2, r1);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0){
 			end = MPI_Wtime();
@@ -230,7 +237,7 @@ int main(int argc, char * argv[])
 
 	if (world_rank == 0)
 	{
-		printf ("Kai Finish parallel compressing, total compression ratio %.4g.\n", 1.0*r1*r2*r3*sizeof(float)*num_vars / total_size);
+		printf ("MGARD+ Finish parallel compressing, total compression ratio %.4g.\n", 1.0*r1*r2*r3*sizeof(float)*num_vars / total_size);
 		printf("Separate ratios: ");
 		for(int i=0; i<num_vars; i++){
 			printf("%.4g ", 1.0*r1*r2*r3*sizeof(float) / compressed_size[i]);
