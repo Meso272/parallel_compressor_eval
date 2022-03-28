@@ -15,7 +15,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <sz.hpp>
+#include "SZ3/api/sz.hpp"
 #include "rw1.h"
 #include "mpi.h"
 
