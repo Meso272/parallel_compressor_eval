@@ -7,7 +7,7 @@ rm parallel_zfp parallel_sz2
 
 szsrc=$HOME/packages/SZ2/include
 szlib=$HOME/packages/SZ2/lib/
-sz3src=$HOME/packages/SZ3/include
+sz3src=$HOME/packages/SZ3/include/SZ3/api
 sz3lib=$HOME/packages/SZ3/lib64/
 zfpsrc=$HOME/zfp/include
 zfplib=$HOME/zfp/lib
