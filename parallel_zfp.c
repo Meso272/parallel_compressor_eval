@@ -162,7 +162,7 @@ int main(int argc, char* argv[]) {
     }
 
 
-    size_t  r1,r2,r3; //384 384 256, 500 500 100
+    size_t  r1,r2,r3,r4,r5; //384 384 256, 500 500 100
     r1 = atof(argv[2]);
     r2 = atof(argv[3]);
     r3= atof(argv[4]);
