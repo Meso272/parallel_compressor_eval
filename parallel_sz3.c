@@ -175,12 +175,12 @@ int main(int argc, char * argv[])
 		
 		// Compress Input Data
 		size_t out_size;
-		if (world_rank == 0) //printf ("Compressing %s\n", filename);
+		//if (world_rank == 0) printf ("Compressing %s\n", filename);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0) start = MPI_Wtime();
 
         unsigned char *bytesOut = (unsigned char *)SZ_compress<float>(conf, dataIn, compressed_size[i]);
-        printf ("Compressing %d ended.\n", world_rank);
+      
 //		unsigned char *bytesOut = SZ_compress_args(SZ_FLOAT, dataIn, &compressed_size[i], REL, 0, rel_bound[i], 0, r5, r4, r3, r2, r1);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0){
@@ -189,10 +189,10 @@ int main(int argc, char * argv[])
 		}
 		free (dataIn);
 		memcpy(compressed_output_pos, bytesOut, compressed_size[i]);
-        printf ("memcpy %d ended.\n", world_rank);
+      
 		compressed_output_pos += compressed_size[i];
 		free(bytesOut);
-        printf ("free %d ended.\n", world_rank);
+      
 
 	}
     struct stat st = {0};
@@ -201,13 +201,13 @@ int main(int argc, char * argv[])
     }
     sprintf(zip_filename, "%s/sz3_%d_%d.out", "/lcrc/globalscratch/jinyang", folder_index, rand());	// Write Compressed Data
     size_t total_size = compressed_output_pos - compressed_output;
-    printf ("beforewrite %d ended.\n", world_rank);
+  
 	// Write Compressed Data
 	MPI_Barrier(MPI_COMM_WORLD);
-    if (world_rank == 0) //printf("write compressed file to disk %s \n", zip_filename);
+    //if (world_rank == 0) printf("write compressed file to disk %s \n", zip_filename);
     if(world_rank == 0) start = MPI_Wtime();
 	writeByteData(compressed_output, total_size, zip_filename, &status);
-    printf ("writecomp %d ended.\n", world_rank);
+  
 	MPI_Barrier(MPI_COMM_WORLD);
 	if(world_rank == 0){
 		end = MPI_Wtime();
@@ -216,7 +216,7 @@ int main(int argc, char * argv[])
 	free(compressed_output);
 	// Read Compressed Data
     MPI_Barrier(MPI_COMM_WORLD);
-    if (world_rank == 0) //printf("read compressed file from disk %s \n", zip_filename);
+    //if (world_rank == 0) printf("read compressed file from disk %s \n", zip_filename);
     if(world_rank == 0) start = MPI_Wtime();
 	compressed_output = readByteData(zip_filename, &inSize, &status);
     if (inSize != total_size) {
@@ -236,10 +236,10 @@ int main(int argc, char * argv[])
     for(int i=0; i<num_vars; i++){
 		// Decompress Compressed Data
         MPI_Barrier(MPI_COMM_WORLD);
-        if (world_rank == 0) //printf("decompress %d-th field\n", i);
+        //if (world_rank == 0) printf("decompress %d-th field\n", i);
         if(world_rank == 0) start = MPI_Wtime();
         float *dataOut = SZ_decompress<float>(conf,(char*)compressed_output_pos, compressed_size[i]);
-        printf ("decompress %d ended.\n", world_rank);
+    
 //        float *dataOut = SZ_decomprescs(SZ_FLOAT, compressed_output_pos, compressed_size[i], r5, r4, r3, r2, r1);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0){
