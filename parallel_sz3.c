@@ -176,11 +176,12 @@ int main(int argc, char * argv[])
 		
 		// Compress Input Data
 		size_t out_size;
+
 		if (world_rank == 0) printf ("Compressing %s\n", filename);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0) start = MPI_Wtime();
 
-        unsigned char *bytesOut = (unsigned char *)SZ_compress<float>(conf, dataIn, compressed_size[i]);
+        char *bytesOut = SZ_compress<float>(conf, dataIn, compressed_size[i]);
         printf ("Compressing %d end.\n", world_rank);
       
 //		unsigned char *bytesOut = SZ_compress_args(SZ_FLOAT, dataIn, &compressed_size[i], REL, 0, rel_bound[i], 0, r5, r4, r3, r2, r1);
