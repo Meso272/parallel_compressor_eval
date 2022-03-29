@@ -19,7 +19,7 @@ mgardsrc=$HOME/MGARDx/include
 zstdsrc=$HOME/packages/zstd/include
 zstdlib=$HOME/packages/zstd/lib
 metasrc=$HOME/packages/meta_compressor/include/sz_cpp   
-metalib=$HOME/packages/meta_compressor/lib
+metalib=$HOME/packages/meta_compressor/lib64
 gcc -c rw.c
 g++ -c rw.c -o rwx.o
 
