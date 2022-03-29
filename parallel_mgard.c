@@ -164,7 +164,7 @@ int main(int argc, char * argv[])
 		
 		// Compress Input Data
 		size_t out_size;
-		if (world_rank == 0) //printf ("Compressing %s\n", filename);
+		//if (world_rank == 0) printf ("Compressing %s\n", filename);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0) start = MPI_Wtime();
         MGARD::Decomposer<float> decomposer(1);
@@ -189,7 +189,7 @@ int main(int argc, char * argv[])
     size_t total_size = compressed_output_pos - compressed_output;
 	// Write Compressed Data
 	MPI_Barrier(MPI_COMM_WORLD);
-    if (world_rank == 0) printf("write compressed file to disk %s \n", zip_filename);
+    //if (world_rank == 0) printf("write compressed file to disk %s \n", zip_filename);
     if(world_rank == 0) start = MPI_Wtime();
 	writeByteData(compressed_output, total_size, zip_filename, &status);
 	MPI_Barrier(MPI_COMM_WORLD);
@@ -200,7 +200,7 @@ int main(int argc, char * argv[])
 	free(compressed_output);
 	// Read Compressed Data
     MPI_Barrier(MPI_COMM_WORLD);
-    if (world_rank == 0) //printf("read compressed file from disk %s \n", zip_filename);
+    //if (world_rank == 0) printf("read compressed file from disk %s \n", zip_filename);
     if(world_rank == 0) start = MPI_Wtime();
 	compressed_output = readByteData(zip_filename, &inSize, &status);
     if (inSize != total_size) {
@@ -220,7 +220,7 @@ int main(int argc, char * argv[])
     for(int i=0; i<num_vars; i++){
 		// Decompress Compressed Data
         MPI_Barrier(MPI_COMM_WORLD);
-        if (world_rank == 0) //printf("decompress %d-th field\n", i);
+        //if (world_rank == 0) printf("decompress %d-th field\n", i);
         if(world_rank == 0) start = MPI_Wtime();
         MGARD::Recomposer<float> recomposer;
         float *dataOut = recomposer.decompress(compressed_output_pos, compressed_size[i],dims);
