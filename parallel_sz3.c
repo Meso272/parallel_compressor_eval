@@ -129,8 +129,8 @@ int main(int argc, char * argv[])
 	float * dataIn;
 
 	size_t est_compressed_size = r1 * r2 * r3 * sizeof(float) * num_vars / 5;
-	unsigned char * compressed_output = (unsigned char *) malloc(est_compressed_size);
-	unsigned char * compressed_output_pos = compressed_output;
+	char * compressed_output = (char *) malloc(est_compressed_size);
+	char * compressed_output_pos = compressed_output;
 	int folder_index = world_rank;
     
     SZ::Config conf;
@@ -180,7 +180,7 @@ int main(int argc, char * argv[])
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0) start = MPI_Wtime();
 
-        unsigned char *bytesOut = SZ_compress<float>(conf,dataIn, compressed_size[i]);
+        char *bytesOut = SZ_compress<float>(conf,dataIn, compressed_size[i]);
 //		unsigned char *bytesOut = SZ_compress_args(SZ_FLOAT, dataIn, &compressed_size[i], REL, 0, rel_bound[i], 0, r5, r4, r3, r2, r1);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0){
