@@ -14,19 +14,14 @@ echo date=`date`
 
 
 # Hurricane
-srun ./parallel_sz sz.config 13 496 496 96
-srun ./parallel_zfp sz.config 13 496 496 96
-srun ./parallel_selector sz.config 13 496 496 96
-srun ./parallel_kai sz.config 13 496 496 96
+srun ./parallel_sz 13 496 496 96
+srun ./parallel_zfp 13 496 496 96
+srun ./parallel_sz3 sz.config 13 496 496 96
+srun ./parallel_qoz sz.config 13 496 496 96
 
 # miranda
-srun ./parallel_sz sz.config 7 384 384 256
-srun ./parallel_zfp sz.config 7 384 384 256
-srun ./parallel_selector sz.config 7 384 384 256
-srun ./parallel_kai sz.config 7 384 384 256
+srun ./parallel_sz  7 384 384 256
+srun ./parallel_zfp 7 384 384 256
+srun ./parallel_sz3 sz.config 7 384 384 256
+srun ./parallel_qoz sz.config 7 384 384 256
 
-# qmcpack8h
-srun ./parallel_sz sz.config 2 64 64 93840
-srun ./parallel_zfp sz.config 2 64 64 93840
-srun ./parallel_kai sz.config 2 64 64 93840
-srun ./parallel_selector_in_block sz.config 1 64 64 33120

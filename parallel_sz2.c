@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 
     
 
-    if (argc < 1) {
+    if (argc < 2) {
         printf("Test case: parallel_sz num_vars r1 r2 r3\n");
         printf("Example: parallel_sz 7 384 384 256 \n");
         exit(0);
