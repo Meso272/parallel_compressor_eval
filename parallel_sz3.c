@@ -192,6 +192,7 @@ int main(int argc, char * argv[])
         printf ("memcpy %d ended.\n", world_rank);
 		compressed_output_pos += compressed_size[i];
 		free(bytesOut);
+        printf ("free %d ended.\n", world_rank);
 
 	}
     struct stat st = {0};
@@ -200,6 +201,7 @@ int main(int argc, char * argv[])
     }
     sprintf(zip_filename, "%s/sz3_%d_%d.out", "/lcrc/globalscratch/jinyang", folder_index, rand());	// Write Compressed Data
     size_t total_size = compressed_output_pos - compressed_output;
+    printf ("beforewrite %d ended.\n", world_rank);
 	// Write Compressed Data
 	MPI_Barrier(MPI_COMM_WORLD);
     if (world_rank == 0) //printf("write compressed file to disk %s \n", zip_filename);
