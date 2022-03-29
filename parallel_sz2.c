@@ -33,23 +33,52 @@ int main(int argc, char *argv[]) {
     double rel_bound[100];
 
     if (argc < 1) {
-        printf("Test case: parallel_sz [config_file] eb...\n");
-        printf("Example: parallel_sz sz.config 1e-3 \n");
+        printf("Test case: parallel_sz num_vars r1 r2 r3\n");
+        printf("Example: parallel_sz 7 384 384 256 \n");
         exit(0);
     }
-    char *cfgFile = argv[1];
+    char *file_folder = "/lcrc/project/ECP-EZ/public/compression/datasets/0";
+    int num_vars = atoi(argv[1]);
 
     //Begin modify this part
-    int num_vars = 7;
-    char *file_folder = "/lcrc/project/ECP-EZ/public/compression/datasets/0";
-    char file[7][100] = {"velocityy_truncated.bin.dat", "velocityx_truncated.bin.dat", "density_truncated.bin.dat",
+    int hurricane_num_vars = 13;
+    char hurricane_file[13][50] = {"Uf48_truncated.bin.dat", "Vf48_truncated.bin.dat", "Wf48_truncated.bin.dat",
+                                   "TCf48_truncated.bin.dat", "Pf48_truncated.bin.dat", "QVAPORf48_truncated.bin.dat",
+                                   "CLOUDf48_log10_truncated.bin.dat", "QCLOUDf48_log10_truncated.bin.dat", "QICEf48_log10_truncated.bin.dat",
+                                   "QRAINf48_log10_truncated.bin.dat", "QSNOWf48_log10_truncated.bin.dat", "QGRAUPf48_log10_truncated.bin.dat",
+                                   "PRECIPf48_log10_truncated.bin.dat"};
+    double hurricane_rel_bound[13] = {1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
+    // miranda
+    int miranda_num_vars = 7;
+    char miranda_file[7][50] = {"velocityy_truncated.bin.dat", "velocityx_truncated.bin.dat", "density_truncated.bin.dat",
                                 "pressure_truncated.bin.dat", "velocityz_truncated.bin.dat", "viscocity_truncated.bin.dat",
                                 "diffusivity_truncated.bin.dat"};
-    size_t r5 = 0, r4 = 0, r3 = 256, r2 = 384, r1 = 384;
-    rel_bound[0] = atof(argv[2]);
-    rel_bound[1] = atof(argv[3]);
-    rel_bound[2] = atof(argv[4]);
-    rel_bound[3] = atof(argv[5]);
+    double miranda_rel_bound[7] = {1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
+
+
+
+    char file[20][50];
+    double *rel_bound;
+    
+    if (num_vars == hurricane_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], hurricane_file[i]);
+        rel_bound = hurricane_rel_bound;
+    } else if (num_vars == miranda_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], miranda_file[i]);
+        rel_bound = miranda_rel_bound;
+    } else {
+        printf("No such variable, exit\n");
+//        SZ_Finalize();
+        MPI_Finalize();
+        return 0;
+    }
+
+
+    size_t  r1,r2,r3; //384 384 256, 500 500 100
+    r1 = atof(argv[2]);
+    r2 = atof(argv[3]);
+    r3= atof(argv[4]);
+   
     //End modify this part
 
     SZ_Init(NULL);

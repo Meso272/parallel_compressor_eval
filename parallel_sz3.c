@@ -37,8 +37,8 @@ int main(int argc, char * argv[])
 	
 	if(argc < 3)
 	{
-		printf("Test case: testfloat_compress [config_file] [srcFilePath] [dimension sizes...]\n");
-		printf("Example: testfloat_compress sz.config testfloat_8_8_128.dat 8 8 128\n");
+		printf("Test case: parallel_sz3 [config_file] num_vars [dimension sizes...]\n");
+		printf("Example: parallel_sz3 sz.config 7 384 384 256\n");
 		exit(0);
 	}
 
@@ -85,17 +85,16 @@ int main(int argc, char * argv[])
     int hurricane_num_vars = 13;
     char hurricane_file[13][50] = {"Uf48_truncated.bin.dat", "Vf48_truncated.bin.dat", "Wf48_truncated.bin.dat",
                                    "TCf48_truncated.bin.dat", "Pf48_truncated.bin.dat", "QVAPORf48_truncated.bin.dat",
-                                   "CLOUDf48_truncated.bin.dat", "QCLOUDf48_truncated.bin.dat", "QICEf48_truncated.bin.dat",
-                                   "QRAINf48_truncated.bin.dat", "QSNOWf48_truncated.bin.dat", "QGRAUPf48_truncated.bin.dat",
-                                   "PRECIPf48_truncated.bin.dat"};
-    double hurricane_rel_bound[13] = {1e-6, 1e-6, 1e-6, 1e-6, 1e-6, 1e-6, 1e-6, 1e-6, 1e-6, 1e-6, 1e-6, 1e-6, 1e-6};
+                                   "CLOUDf48_log10_truncated.bin.dat", "QCLOUDf48_log10_truncated.bin.dat", "QICEf48_log10_truncated.bin.dat",
+                                   "QRAINf48_log10_truncated.bin.dat", "QSNOWf48_log10_truncated.bin.dat", "QGRAUPf48_log10_truncated.bin.dat",
+                                   "PRECIPf48_log10_truncated.bin.dat"};
+    double hurricane_rel_bound[13] ={1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
     // miranda
     int miranda_num_vars = 7;
     char miranda_file[7][50] = {"velocityy_truncated.bin.dat", "velocityx_truncated.bin.dat", "density_truncated.bin.dat",
                                 "pressure_truncated.bin.dat", "velocityz_truncated.bin.dat", "viscocity_truncated.bin.dat",
                                 "diffusivity_truncated.bin.dat"};
-    double miranda_rel_bound[7] = {1e-5, 1e-5, 1e-5, 1e-5, 1e-5, 1e-5, 1e-5};
-
+    double miranda_rel_bound[7] = {1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
     // assignment
     char file[20][50];
     double *rel_bound;

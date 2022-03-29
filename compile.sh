@@ -4,7 +4,7 @@ module purge
 module load gcc/8.2.0-g7hppkz
 module load mpich
 module load zstd/1.4.5-uxapdkl
-rm parallel_zfp parallel_sz2 parallel_sz3 parallel_mgard
+rm parallel_zfp parallel_sz2 parallel_sz3 parallel_mgard parallel_qoz
 
 szsrc=$HOME/packages/SZ2/include
 szlib=$HOME/packages/SZ2/lib/
@@ -20,6 +20,8 @@ zstdsrc=$HOME/packages/zstd/include
 zstdlib=$HOME/packages/zstd/lib
 metasrc=$HOME/packages/meta_compressor/include/sz_cpp   
 metalib=$HOME/packages/meta_compressor/lib64
+qozsrc=$HOME/packages/SZ3_test/include
+qozlib=$HOME/packages/SZ3_test/lib64/
 gcc -c rw.c
 g++ -c rw.c -o rwx.o
 
@@ -27,7 +29,10 @@ g++ -c rw.c -o rwx.o
 
 mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I $szsrc -L $szlib -l SZ -l zstd -lm
 
-mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib -l SZ -l zstd -lm
+mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib  -l zstd -lm
+
+mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_qoz -I $qozsrc -L $qozlib -l zstd -lm
+
 
 mpicc -std=c99 -O3 rw.o parallel_zfp.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
 

@@ -107,8 +107,7 @@ float* zfp_decompress_3D(unsigned char* comp_data, double tolerance, size_t buff
     return array;
 }
 
-// USAGE
-// mpirun -np 16 parallel sz.config folder_num r3 r2 r1
+
 int main(int argc, char* argv[]) {
     srand(time(0));
     char* cfgFile;
@@ -125,16 +124,50 @@ int main(int argc, char* argv[]) {
     double absbound[100];
 
     //Begin modify this part
-    int num_vars = 7;
+
     char* file_folder = "/lcrc/project/ECP-EZ/public/compression/datasets/0";
-    char file[7][100] = {"velocityy_truncated.bin.dat", "velocityx_truncated.bin.dat", "density_truncated.bin.dat",
+    int num_vars = atoi(argv[1]);
+
+    //Begin modify this part
+    int hurricane_num_vars = 13;
+    char hurricane_file[13][50] = {"Uf48_truncated.bin.dat", "Vf48_truncated.bin.dat", "Wf48_truncated.bin.dat",
+                                   "TCf48_truncated.bin.dat", "Pf48_truncated.bin.dat", "QVAPORf48_truncated.bin.dat",
+                                   "CLOUDf48_log10_truncated.bin.dat", "QCLOUDf48_log10_truncated.bin.dat", "QICEf48_log10_truncated.bin.dat",
+                                   "QRAINf48_log10_truncated.bin.dat", "QSNOWf48_log10_truncated.bin.dat", "QGRAUPf48_log10_truncated.bin.dat",
+                                   "PRECIPf48_log10_truncated.bin.dat"};
+    double hurricane_abs_bound[13] = {0.0925808, 0.0937004, 0.0165744, 0.106201, 6.636139, 2.042072e-5, 0.0101520, 0.03510557, 0.0186831, 0.0357314,0.0347797,0.0357656, 0.0358014};
+    // miranda
+    int miranda_num_vars = 7;
+    char miranda_file[7][50] = {"velocityy_truncated.bin.dat", "velocityx_truncated.bin.dat", "density_truncated.bin.dat",
                                 "pressure_truncated.bin.dat", "velocityz_truncated.bin.dat", "viscocity_truncated.bin.dat",
                                 "diffusivity_truncated.bin.dat"};
-    size_t r5 = 0, r4 = 0, r3 = 256, r2 = 384, r1 = 384;
-    absbound[0] = atof(argv[1]);
-    absbound[1] = atof(argv[2]);
-    absbound[2] = atof(argv[3]);
-    absbound[3] = atof(argv[4]);
+    double miranda_abs_bound[7] = {0.00439109, 0.00451150, 0.002, 0.00441428, 0.01415384, 0.00262133, 0.00261515};
+
+
+
+    char file[20][50];
+    double *rel_bound;
+    
+    if (num_vars == hurricane_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], hurricane_file[i]);
+        absbound = hurricane_abs_bound;
+    } else if (num_vars == miranda_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], miranda_file[i]);
+        absbound = miranda_abs_bound;
+    } else {
+        printf("No such variable, exit\n");
+//        SZ_Finalize();
+        MPI_Finalize();
+        return 0;
+    }
+
+
+    size_t  r1,r2,r3; //384 384 256, 500 500 100
+    r1 = atof(argv[2]);
+    r2 = atof(argv[3]);
+    r3= atof(argv[4]);
+   
+    //End modify this part
     //End modify this part
 
     if (world_rank == 0) printf("Start parallel compressing ... \n");
