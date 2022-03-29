@@ -3,7 +3,8 @@
 module purge
 module load gcc/8.2.0-g7hppkz
 module load mpich
-rm parallel_zfp parallel_sz2
+module load zstd/1.4.5-uxapdkl
+rm parallel_zfp parallel_sz2 parallel_sz3 parallel_mgard
 
 szsrc=$HOME/packages/SZ2/include
 szlib=$HOME/packages/SZ2/lib/
@@ -19,13 +20,14 @@ zstdlib=$HOME/packages/zstd/lib
 metasrc=$HOME/packages/meta_compressor/include/sz_cpp   
 metalib=$HOME/packages/meta_compressor/lib
 gcc -c rw.c
+g++ -c rw.c -o rwx.o
 
 # mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I$szsrc $szlib/libSZ.a $szlib/libzstd.a $szlib/libzlib.a -lm
 
 mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I $szsrc -L $szlib -l SZ -l zstd -lm
 
-mpicxx -std=c99 -O3 rw.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib -l SZ -l zstd -lm
+mpicxx -std=c99 -O3 rwx.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib -l SZ -l zstd -lm
 
 mpicc -std=c99 -O3 rw.o parallel_zfp.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
 
-mpicxx -std=c99 -O3 rw.o parallel_mgard.c -o parallel_mgard -I $mgardsrc -I $zstdsrc -L $zstdlib -I $metasrc -L $metalib -lm
+mpicxx -std=c99 -O3 rwx.o parallel_mgard.c -o parallel_mgard -I $mgardsrc -I $zstdsrc -L $zstdlib -I $metasrc -L $metalib -lm
