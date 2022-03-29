@@ -27,4 +27,4 @@ mpicxx -std=c99 -O3 rw.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib -l
 
 mpicc -std=c99 -O3 rw.o parallel_zfp.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
 
-mpicxx -std=c99 -O3 rw.o parallel_mgard.c -o parallel_mgard -I $mgardsrc -I $zstdsrc -L $zstdlib -l zstd  -lm
+mpicxx -std=c99 -O3 rw.o parallel_mgard.c -o parallel_mgard -I $mgardsrc -I $zstdsrc -L $zstdlib  -lm
