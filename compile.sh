@@ -16,7 +16,7 @@ mgardsrc=$HOME/MGARDx/include
 #mgardlib=$HOME/code/mgardp/build/lib/
 zstdsrc=$HOME/packages/zstd/include
 zstdlib=$HOME/packages/zstd/lib
-metasrc=$HOME/packages/meta_compressor/include
+metasrc=$HOME/packages/meta_compressor/include/sz_cpp   
 metalib=$HOME/packages/meta_compressor/lib
 gcc -c rw.c
 
