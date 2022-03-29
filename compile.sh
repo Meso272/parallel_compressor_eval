@@ -28,8 +28,10 @@ g++ -c rw.c -o rwx.o
 # mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I$szsrc $szlib/libSZ.a $szlib/libzstd.a $szlib/libzlib.a -lm
 
 mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I $szsrc -L $szlib -l SZ -l zstd -lm
-mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_qoz -I $qozsrc -L $qozlib -l zstd -lm
+
 mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib  -l zstd -lm
+
+mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_qoz -I $qozsrc -L $qozlib -l zstd -lm -undef
 
 
 
