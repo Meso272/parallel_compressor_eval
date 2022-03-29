@@ -15,9 +15,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <decompose.hpp>
-#include <recompose.hpp>
-#include "rw1.h"
+#include "decompose.hpp"
+#include "recompose.hpp"
+#include "rw.h"
 #include "mpi.h"
 
 // USAGE

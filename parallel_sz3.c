@@ -16,7 +16,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "SZ3/api/sz.hpp"
-#include "rw1.h"
+#include "rw.h"
 #include "mpi.h"
 
 // USAGE
