@@ -155,12 +155,12 @@ int main(int argc, char * argv[])
 			start = MPI_Wtime();
 			dataIn = readFloatData(filename, &nbEle, &status);
 			end = MPI_Wtime();
-			//printf("file %s read time: %.2f\n", filename, end - start);
+			printf("file %s read time: %.2f\n", filename, end - start);
 			start = MPI_Wtime();
 			MPI_Bcast(&nbEle, 1, MPI_UNSIGNED_LONG_LONG, 0, MPI_COMM_WORLD);
 			MPI_Bcast(dataIn, nbEle, MPI_FLOAT, 0, MPI_COMM_WORLD);
 			end = MPI_Wtime();
-			//printf("broadcast time: %.2f\n", end - start);
+			printf("broadcast time: %.2f\n", end - start);
 		}
 		else{
 			MPI_Bcast(&nbEle, 1, MPI_UNSIGNED_LONG_LONG, 0, MPI_COMM_WORLD);
@@ -175,7 +175,7 @@ int main(int argc, char * argv[])
 		
 		// Compress Input Data
 		size_t out_size;
-		//if (world_rank == 0) printf ("Compressing %s\n", filename);
+		if (world_rank == 0) printf ("Compressing %s\n", filename);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0) start = MPI_Wtime();
 
