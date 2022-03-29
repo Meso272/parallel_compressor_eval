@@ -13,8 +13,9 @@ sz3lib=$HOME/packages/SZ3/lib64/
 zfpsrc=$HOME/zfp/include
 zfplib=$HOME/zfp/lib
 
-mgardsrc=$HOME/MGARDx/include
+
 #mgardlib=$HOME/code/mgardp/build/lib/
+mgardsrc=$HOME/MGARDx/include
 zstdsrc=$HOME/packages/zstd/include
 zstdlib=$HOME/packages/zstd/lib
 metasrc=$HOME/packages/meta_compressor/include/sz_cpp   
@@ -26,8 +27,8 @@ g++ -c rw.c -o rwx.o
 
 mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I $szsrc -L $szlib -l SZ -l zstd -lm
 
-mpicxx -std=c99 -O3 rwx.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib -l SZ -l zstd -lm
+mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib -l SZ -l zstd -lm
 
 mpicc -std=c99 -O3 rw.o parallel_zfp.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
 
-mpicxx -std=c99 -O3 rwx.o parallel_mgard.c -o parallel_mgard -I $mgardsrc -I $zstdsrc -L $zstdlib -I $metasrc -L $metalib -lm
+mpicxx  -O3 rwx.o parallel_mgard.c -o parallel_mgard -I $mgardsrc -I $zstdsrc -L $zstdlib -I $metasrc -L $metalib -l mgardx -l meta_compressor -l zstd -lm
