@@ -120,8 +120,8 @@ int main(int argc, char* argv[]) {
     int world_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 
-    double rel_bound[100];
-    double absbound[100];
+   
+    double * absbound;
 
     //Begin modify this part
 
@@ -146,7 +146,7 @@ int main(int argc, char* argv[]) {
 
 
     char file[20][50];
-    double *rel_bound;
+    
     
     if (num_vars == hurricane_num_vars) {
         for (int i = 0; i < num_vars; i++) strcpy(file[i], hurricane_file[i]);

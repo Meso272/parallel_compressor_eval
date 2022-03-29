@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     int world_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 
-    double rel_bound[100];
+    
 
     if (argc < 1) {
         printf("Test case: parallel_sz num_vars r1 r2 r3\n");
