@@ -138,7 +138,7 @@ int main(int argc, char * argv[])
 
 	for(int i=0; i<num_vars; i++){
 		sprintf(filename, "%s/%d/%s", folder, folder_index, file[i]);
-        conf.relErrorBound = rel_bound[i];
+        
 		// Read Input Data
 		if(world_rank == 0){
 			start = MPI_Wtime();
@@ -169,7 +169,7 @@ int main(int argc, char * argv[])
 		if(world_rank == 0) start = MPI_Wtime();
         MGARD::Decomposer<float> decomposer(1);
 
-        unsigned char *bytesOut = decomposer.compress(dataIn, dims,3,rel_bound[i],&compressed_size[i]);
+        unsigned char *bytesOut = decomposer.compress(dataIn, dims,3,rel_bound[i],compressed_size[i]);
 //		unsigned char *bytesOut = SZ_compress_args(SZ_FLOAT, dataIn, &compressed_size[i], REL, 0, rel_bound[i], 0, r5, r4, r3, r2, r1);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0){
