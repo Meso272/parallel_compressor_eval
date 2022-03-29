@@ -180,7 +180,7 @@ int main(int argc, char * argv[])
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0) start = MPI_Wtime();
 
-        unsigned char *bytesOut = SZ_compress<float>(dataIn, r3, r2, r1, rel_bound[i], compressed_size[i]);
+        unsigned char *bytesOut = SZ_compress<float>(conf,dataIn, compressed_size[i]);
 //		unsigned char *bytesOut = SZ_compress_args(SZ_FLOAT, dataIn, &compressed_size[i], REL, 0, rel_bound[i], 0, r5, r4, r3, r2, r1);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0){
@@ -233,7 +233,7 @@ int main(int argc, char * argv[])
         MPI_Barrier(MPI_COMM_WORLD);
         if (world_rank == 0) printf("decompress %d-th field\n", i);
         if(world_rank == 0) start = MPI_Wtime();
-        float *dataOut = SZ_decompress(conf,compressed_output_pos, compressed_size[i]);
+        float *dataOut = SZ_decompress<float>(conf,compressed_output_pos, compressed_size[i]);
 //        float *dataOut = SZ_decomprescs(SZ_FLOAT, compressed_output_pos, compressed_size[i], r5, r4, r3, r2, r1);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0){
