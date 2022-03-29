@@ -166,6 +166,8 @@ int main(int argc, char* argv[]) {
     r1 = atof(argv[2]);
     r2 = atof(argv[3]);
     r3= atof(argv[4]);
+    r4=0;
+    r5=0;
    
     //End modify this part
     //End modify this part
