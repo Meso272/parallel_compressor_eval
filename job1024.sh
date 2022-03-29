@@ -17,12 +17,17 @@ echo date=`date`
 srun ./parallel_sz 13 496 496 96
 srun ./parallel_zfp 13 496 496 96
 srun ./parallel_mgard 13 496 496 96
-srun ./parallel_sz3 sz.config 13 496 496 96
-srun ./parallel_qoz sz.config 13 496 496 96
+srun ./parallel_sz3 hurricane.config 13 496 496 96
+printf "SZ3 END"
+srun ./parallel_qoz hurricane.config 13 496 496 96
+printf "QOZ END"
 
 # miranda
 srun ./parallel_sz  7 384 384 256
 srun ./parallel_zfp 7 384 384 256
-srun ./parallel_sz3 sz.config 7 384 384 256
-srun ./parallel_qoz sz.config 7 384 384 256
+srun ./parallel_mgard 7 384 384 256
+srun ./parallel_sz3 miranda.config 7 384 384 256
+printf "SZ3 END"
+srun ./parallel_qoz miranda.config 7 384 384 256
+printf "QOZ END"
 
