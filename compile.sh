@@ -38,4 +38,4 @@ mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_qoz -I $qozsrc -L $qozlib -l zstd -
 
 mpicc -std=c99 -O3 rw.o parallel_zfp.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
 
-mpicxx  -O3 rwx.o parallel_mgard.c -o parallel_mgard -I $mgardsrc -I $zstdsrc -L $zstdlib -I $metasrc -L $metalib -l sz_cpp -l zstd -lm
+mpicxx  -O3 rwx.o parallel_mgard.c -o parallel_mgard -I $mgardsrc  -I $metasrc -L $metalib -l sz_cpp -l zstd -lm
