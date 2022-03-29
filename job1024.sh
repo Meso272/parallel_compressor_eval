@@ -16,6 +16,7 @@ echo date=`date`
 # Hurricane
 srun ./parallel_sz 13 496 496 96
 srun ./parallel_zfp 13 496 496 96
+srun ./parallel_mgard 13 496 496 96
 srun ./parallel_sz3 sz.config 13 496 496 96
 srun ./parallel_qoz sz.config 13 496 496 96
 
