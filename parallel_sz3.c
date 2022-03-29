@@ -180,6 +180,7 @@ int main(int argc, char * argv[])
 		if(world_rank == 0) start = MPI_Wtime();
 
         unsigned char *bytesOut = (unsigned char *)SZ_compress<float>(conf, dataIn, compressed_size[i]);
+        printf ("Compressing %s end.\n", world_rank);
       
 //		unsigned char *bytesOut = SZ_compress_args(SZ_FLOAT, dataIn, &compressed_size[i], REL, 0, rel_bound[i], 0, r5, r4, r3, r2, r1);
 		MPI_Barrier(MPI_COMM_WORLD);
@@ -189,12 +190,14 @@ int main(int argc, char * argv[])
 		}
 		free (dataIn);
 		memcpy(compressed_output_pos, bytesOut, compressed_size[i]);
+        printf ("memcpy %s end.\n", world_rank);
       
 		compressed_output_pos += compressed_size[i];
 		free(bytesOut);
       
 
 	}
+    printf ("total %s end.\n", world_rank);
     struct stat st = {0};
     if (stat("/lcrc/globalscratch/jinyang", &st) == -1) {
         mkdir("/lcrc/globalscratch/jinyang", 0777);
@@ -207,6 +210,7 @@ int main(int argc, char * argv[])
     //if (world_rank == 0) printf("write compressed file to disk %s \n", zip_filename);
     if(world_rank == 0) start = MPI_Wtime();
 	writeByteData(compressed_output, total_size, zip_filename, &status);
+    printf ("write %s end.\n", world_rank);
   
 	MPI_Barrier(MPI_COMM_WORLD);
 	if(world_rank == 0){
@@ -219,6 +223,7 @@ int main(int argc, char * argv[])
     //if (world_rank == 0) printf("read compressed file from disk %s \n", zip_filename);
     if(world_rank == 0) start = MPI_Wtime();
 	compressed_output = readByteData(zip_filename, &inSize, &status);
+    printf ("read %s end.\n", world_rank);
     if (inSize != total_size) {
         printf("ERROR! Broken file : %s", zip_filename);
     } else {
@@ -239,6 +244,7 @@ int main(int argc, char * argv[])
         //if (world_rank == 0) printf("decompress %d-th field\n", i);
         if(world_rank == 0) start = MPI_Wtime();
         float *dataOut = SZ_decompress<float>(conf,(char*)compressed_output_pos, compressed_size[i]);
+        printf ("decomp %s end.\n", world_rank);
     
 //        float *dataOut = SZ_decomprescs(SZ_FLOAT, compressed_output_pos, compressed_size[i], r5, r4, r3, r2, r1);
 		MPI_Barrier(MPI_COMM_WORLD);
