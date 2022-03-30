@@ -18,8 +18,8 @@ zfplib=$HOME/lossycompression/zfp/lib
 mgardsrc=$HOME/lossycompression/MGARDx/include
 zstdsrc=$HOME/packages/zstd/include
 zstdlib=$HOME/packages/zstd/lib
-metasrc=$HOME/packages/meta_compressor/include/sz_cpp   
-metalib=$HOME/packages/meta_compressor/lib64
+metasrc=$HOME/packages/SZcpp/include/sz_cpp   
+metalib=$HOME/packages/SZcpp/lib64
 qozsrc=$HOME/packages/QOZ/include
 qozlib=$HOME/packages/QOZ/lib64/
 gcc -c rw.c
@@ -27,7 +27,7 @@ g++ -c rw.c -o rwx.o
 
 # mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I$szsrc $szlib/libSZ.a $szlib/libzstd.a $szlib/libzlib.a -lm
 
-mpicc -std=c99 -O3 rw.o parallel_sz2_theta.c -o parallel_sz2 -I $szsrc -L $szlib -l SZ -l zstd -lm
+mpicc -std=c99 -O3 rw.o parallel_sz2_theta.c -o parallel_sz2 -I $szsrc -L $szlib  -l zstd -lm
 
 mpicxx  -O3 rwx.o parallel_sz3_theta.c -o parallel_sz3 -I $sz3src -L $sz3lib  -l zstd -lm
 
