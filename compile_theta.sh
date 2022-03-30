@@ -1,9 +1,9 @@
 #! /bin/bash
 
-module purge
-module load gcc/8.2.0-g7hppkz
-module load mpich
-module load zstd/1.4.5-uxapdkl
+#module purge
+#module load gcc/8.2.0-g7hppkz
+#module load mpich
+#module load zstd/1.4.5-uxapdkl
 rm parallel_zfp parallel_sz2 parallel_sz3 parallel_mgard parallel_qoz
 
 szsrc=$HOME/packages/SZ2/include
