@@ -267,14 +267,14 @@ int main(int argc, char * argv[])
 			printf("%.4g ", 1.0*r1*r2*r3*sizeof(float) / compressed_size[i]);
 		}
 		printf("\n");
-		printf ("Timecost of reading original files = %.2f seconds\n", costReadOri);
-        printf ("Timecost of compressing using %d processes = %.2f seconds\n", world_size, costComp);
-        printf ("Timecost of writing compressed files = %.2f seconds\n", costWriteZip);
-		printf ("Timecost of reading compressed files = %.2f seconds\n", costReadZip);
-        printf ("Timecost of decompressing using %d processes = %.2f seconds\n\n", world_size, costDecomp);
+		printf ("Timecost of reading original files = %.4f seconds\n", costReadOri);
+        printf ("Timecost of compressing using %d processes = %.4f seconds\n", world_size, costComp);
+        printf ("Timecost of writing compressed files = %.4f seconds\n", costWriteZip);
+		printf ("Timecost of reading compressed files = %.4f seconds\n", costReadZip);
+        printf ("Timecost of decompressing using %d processes = %.4f seconds\n\n", world_size, costDecomp);
 
 		
-		printf ("Timecost of writing decompressed files = %.2f seconds\n", costWriteOut);
+		printf ("Timecost of writing decompressed files = %.4f seconds\n", costWriteOut);
 		
 		
 	}

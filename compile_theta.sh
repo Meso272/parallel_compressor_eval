@@ -29,9 +29,9 @@ g++ -c rw.c -o rwx.o
 
 cc -std=c99 -O3 rw.o parallel_sz2_theta.c -o parallel_sz2 -I $szsrc -L $szlib  -l SZ -I $zstdsrc -L $zstdlib -l zlib -l zstd -lm
 
-CC  -O3 rwx.o parallel_sz3_theta.c -o parallel_sz3 -I $sz3src -L $sz3lib  -l zstd -lm
+CC  -O3 rwx.o parallel_sz3_theta.c -o parallel_sz3 -I $sz3src -L $sz3lib  -I $zstdsrc -L $zstdlib -l zstd -lm
 
-CC  -O3 rwx.o parallel_sz3_theta.c -o parallel_qoz -I $qozsrc -L $qozlib -l zstd -lm 
+CC  -O3 rwx.o parallel_sz3_theta.c -o parallel_qoz -I $qozsrc -L $qozlib -I $zstdsrc -L $zstdlib -l zstd -lm 
 
 
 

@@ -205,13 +205,13 @@ int main(int argc, char *argv[]) {
         }
         // printf("\n");
         // printf("Timecost of reading original files = %.2f seconds\n", costReadOri);
-        printf("Timecost of compressing using %d processes = %.2f seconds\n", world_size, costComp);
-        printf("Timecost of writing compressed files = %.2f seconds\n", costWriteZip);
-        printf("Timecost of reading compressed files = %.2f seconds\n", costReadZip);
-        printf("Timecost of decompressing using %d processes = %.2f seconds\n", world_size, costDecomp);
+        printf("Timecost of compressing using %d processes = %.4f seconds\n", world_size, costComp);
+        printf("Timecost of writing compressed files = %.4f seconds\n", costWriteZip);
+        printf("Timecost of reading compressed files = %.4f seconds\n", costReadZip);
+        printf("Timecost of decompressing using %d processes = %.4f seconds\n", world_size, costDecomp);
         // printf("Timecost of writing decompressed files = %.2f seconds\n", costWriteOut);
-        printf("Throughput of reading compressed files = %.2f GB/s\n", total_size * world_size / 1000.0 / 1000 / 1000 / costReadZip);
-        printf("Throughput of writing compressed files = %.2f GB/s\n", total_size * world_size / 1000.0 / 1000 / 1000 / costWriteZip);
+        printf("Throughput of reading compressed files = %.4f GB/s\n", total_size * world_size / 1000.0 / 1000 / 1000 / costReadZip);
+        printf("Throughput of writing compressed files = %.4f GB/s\n", total_size * world_size / 1000.0 / 1000 / 1000 / costWriteZip);
     }
 
     SZ_Finalize();
