@@ -38,4 +38,4 @@ g++ -c rw.c -o rwx.o
 
 #cc -std=c99 -O3 rw.o parallel_zfp_theta.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
 
-CC  -O3 rwx.o parallel_mgard_theta.c -o parallel_mgard -I $mgardsrc  -I $metasrc -L /home/jliu447/packages/SZcpp/lib64 -l sz_cpp -I $zstdsrc -L $zstdlib  -l zstd -lm
+CC  -O3 rwx.o parallel_mgard_theta.c -o parallel_mgard -I $zstdsrc -L $zstdlib  -l zstd -I $mgardsrc -I $metasrc -L $metalib    -l sz_cpp  -lm
