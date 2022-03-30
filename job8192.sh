@@ -4,7 +4,7 @@
 #SBATCH -A ECP-EZ
 #SBATCH --nodes 256
 #SBATCH --ntasks-per-node=32
-#SBATCH --time=24:00:00
+#SBATCH --time=12:00:00
 #SBATCH -o p8192.%j.%N.out
 #SBATCH -e p8192.%j.%N.error
 
@@ -14,19 +14,20 @@ echo date=`date`
 
 
 # Hurricane
-srun ./parallel_sz sz.config 13 496 496 96
-srun ./parallel_zfp sz.config 13 496 496 96
-srun ./parallel_selector sz.config 13 496 496 96
-srun ./parallel_kai sz.config 13 496 496 96
+srun ./parallel_sz 13 496 496 96
+srun ./parallel_zfp 13 496 496 96
+srun ./parallel_mgard 13 496 496 96
+srun ./parallel_sz3 hurricane.config 13 496 496 96
+printf "SZ3 END"
+srun ./parallel_qoz hurricane.config 13 496 496 96
+printf "QOZ END"
 
 # miranda
-srun ./parallel_sz sz.config 7 384 384 256
-srun ./parallel_zfp sz.config 7 384 384 256
-srun ./parallel_selector sz.config 7 384 384 256
-srun ./parallel_kai sz.config 7 384 384 256
+srun ./parallel_sz  7 384 384 256
+srun ./parallel_zfp 7 384 384 256
+srun ./parallel_mgard 7 384 384 256
+srun ./parallel_sz3 miranda.config 7 384 384 256
+printf "SZ3 END"
+srun ./parallel_qoz miranda.config 7 384 384 256
+printf "QOZ END"
 
-# qmcpack8h
-srun ./parallel_sz sz.config 2 64 64 93840
-srun ./parallel_zfp sz.config 2 64 64 93840
-srun ./parallel_kai sz.config 2 64 64 93840
-srun ./parallel_selector_in_block sz.config 1 64 64 33120
