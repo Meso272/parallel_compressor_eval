@@ -11,7 +11,7 @@ aprun -n 64 ./parallel_zfp 13 496 496 96
 aprun -n 64 ./parallel_mgard 13 496 496 96
 aprun -n 64 ./parallel_sz3 hurricane.config 13 496 496 96
 printf "SZ3 END\n"
-srun -n 64 ./parallel_qoz hurricane.config 13 496 496 96
+aprun -n 64 ./parallel_qoz hurricane.config 13 496 496 96
 printf "QOZ END\n"
 
 # miranda
