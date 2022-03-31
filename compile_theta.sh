@@ -40,4 +40,4 @@ g++ -c rw.c -o rwx.o
 echo $HOME/packages/SZcpp/lib64
 ls $HOME/packages/SZcpp/lib64
 ld  -L $HOME/packages/SZcpp/lib64 -l sz_cpp --verbose
-CC -O3 rwx.o parallel_mgard_theta.c -o parallel_mgard -I $zstdsrc -L $zstdlib  -l zstd -I $mgardsrc  -I $metasrc -L $metalib     -lm
+CC -O3 rwx.o parallel_mgard_theta.c -o parallel_mgard -I $zstdsrc -L $zstdlib  -l zstd -I $mgardsrc  -I $metasrc -L $metalib  -l sz_cpp    -lm
