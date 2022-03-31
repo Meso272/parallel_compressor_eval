@@ -37,7 +37,7 @@ g++ -c rw.c -o rwx.o
 
 
 #cc -std=c99 -O3 rw.o parallel_zfp_theta.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
-echo $HOME/packages/SZcpp/lib64
-ls $HOME/packages/SZcpp/lib64
-ld  -L $HOME/packages/SZcpp/lib64 -l sz_cpp --verbose
+echo $metalib
+ls $metalib
+ld  -L $metalib -l sz_cpp --verbose
 CC -O3 rwx.o parallel_mgard_theta.c -o parallel_mgard -I $zstdsrc -L $zstdlib  -l zstd -I $mgardsrc  -I $metasrc -L $metalib  -l sz_cpp    -lm
