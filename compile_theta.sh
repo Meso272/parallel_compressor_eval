@@ -40,4 +40,4 @@ g++ -c rw.c -o rwx.o
 echo $metalib
 ls $metalib
 ld  -L $metalib -l sz_cpp --verbose
-CC -O3 rwx.o parallel_mgard_theta.c -o parallel_mgard  -I $mgardsrc  -I $metasrc -L $metalib -I $zstdsrc -l sz_cpp  -l zstd  -lm
+CC -O3 rwx.o parallel_mgard_theta.c -o parallel_mgard  -I $mgardsrc  -I $metasrc -L $metalib -I $zstdsrc -lsz_cpp -l zstd  -lm
