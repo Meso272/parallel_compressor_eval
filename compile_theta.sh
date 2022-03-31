@@ -5,7 +5,7 @@
 #module load mpich
 #module load zstd/1.4.5-uxapdkl
 #rm parallel_zfp parallel_sz2 parallel_sz3 parallel_mgard parallel_qoz
-export LD_LIBRARY_PATH=$HOME/packages/SZcpp/lib64:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=$HOME/packages/SZcpp/lib64:$LD_LIBRARY_PATH
 szsrc=$HOME/packages/SZ/include
 szlib=$HOME/packages/SZ/lib/
 sz3src=$HOME/packages/SZ3/include
@@ -37,5 +37,5 @@ g++ -c rw.c -o rwx.o
 
 
 #cc -std=c99 -O3 rw.o parallel_zfp_theta.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
-
+echo $HOME/packages/SZcpp/lib64
 CC -O3 rwx.o parallel_mgard_theta.c -o parallel_mgard -I $zstdsrc -L $zstdlib  -l zstd -I $mgardsrc  -I $metasrc -L $metalib    -l sz_cpp  -lm
