@@ -1,6 +1,6 @@
 #! /bin/bash
-echo wait .... 30 seconds
-sleep 30
+echo wait .... 10 seconds
+sleep 10
 echo date=`date`
 cd $HOME/lossycompression/parallel_compressor_eval
 
