@@ -89,13 +89,13 @@ int main(int argc, char * argv[])
                                    "CLOUDf48_log10_truncated.bin.dat", "QCLOUDf48_log10_truncated.bin.dat", "QICEf48_log10_truncated.bin.dat",
                                    "QRAINf48_log10_truncated.bin.dat", "QSNOWf48_log10_truncated.bin.dat", "QGRAUPf48_log10_truncated.bin.dat",
                                    "PRECIPf48_log10_truncated.bin.dat"};
-    double hurricane_rel_bound[13] = {1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
+    double hurricane_rel_bound[13] = {4e-3, 4e-3, 4e-3, 4e-3, 4e-3, 4e-3, 4e-3, 4e-3, 4e-3, 4e-3, 4e-3, 4e-3, 4e-3};
     // miranda
     int miranda_num_vars = 7;
     char miranda_file[7][50] = {"velocityy_truncated.bin.dat", "velocityx_truncated.bin.dat", "density_truncated.bin.dat",
                                 "pressure_truncated.bin.dat", "velocityz_truncated.bin.dat", "viscocity_truncated.bin.dat",
                                 "diffusivity_truncated.bin.dat"};
-    double miranda_rel_bound[7] = {1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
+    double miranda_rel_bound[7] = {0.02,0.02,0.02,0.02,0.02,0.02,0.02};
 
     // assignment
     char file[20][50];

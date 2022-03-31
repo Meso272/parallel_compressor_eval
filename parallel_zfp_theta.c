@@ -135,13 +135,13 @@ int main(int argc, char* argv[]) {
                                    "CLOUDf48_log10_truncated.bin.dat", "QCLOUDf48_log10_truncated.bin.dat", "QICEf48_log10_truncated.bin.dat",
                                    "QRAINf48_log10_truncated.bin.dat", "QSNOWf48_log10_truncated.bin.dat", "QGRAUPf48_log10_truncated.bin.dat",
                                    "PRECIPf48_log10_truncated.bin.dat"};
-    double hurricane_abs_bound[13] = {0.0925808, 0.0937004, 0.0165744, 0.106201, 6.636139, 2.042072e-5, 0.0101520, 0.03510557, 0.0186831, 0.0357314,0.0347797,0.0357656, 0.0358014};
+    double hurricane_abs_bound[13] = {1.851616, 1.874008, 0.331488, 2.12402, 132.72278, 0.0004084144, 0.20304, 0.7021114, 0.373662, 0.714628, 0.695594, 0.715312, 0.716028};
     // miranda
     int miranda_num_vars = 7;
     char miranda_file[7][50] = {"velocityy_truncated.bin.dat", "velocityx_truncated.bin.dat", "density_truncated.bin.dat",
                                 "pressure_truncated.bin.dat", "velocityz_truncated.bin.dat", "viscocity_truncated.bin.dat",
                                 "diffusivity_truncated.bin.dat"};
-    double miranda_abs_bound[7] = {0.00439109, 0.00451150, 0.002, 0.00441428, 0.01415384, 0.00262133, 0.00261515};
+    double miranda_abs_bound[7] = {0.1317327, 0.135345, 0.06, 0.1324284, 0.4246152, 0.0786399, 0.07845450000000001};
 
 
 

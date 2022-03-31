@@ -27,16 +27,16 @@ g++ -c rw.c -o rwx.o
 
 # mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I$szsrc $szlib/libSZ.a $szlib/libzstd.a $szlib/libzlib.a -lm
 
-#cc -std=c99 -O3 parallel_sz2_theta.c -o parallel_sz2 -I $szsrc -L $szlib  -l SZ -I $zstdsrc -L $zstdlib -l zlib -l zstd -lm
+cc -std=c99 -O3 parallel_sz2_theta.c -o parallel_sz2 -I $szsrc -L $szlib  -l SZ -I $zstdsrc -L $zstdlib -l zlib -l zstd -lm
 
-#CC  -O3 rwx.o parallel_sz3_theta.c -o parallel_sz3 -I $sz3src -L $sz3lib  -I $zstdsrc -L $zstdlib -l zstd -lm
+CC  -O3 rwx.o parallel_sz3_theta.c -o parallel_sz3 -I $sz3src -L $sz3lib  -I $zstdsrc -L $zstdlib -l zstd -lm
 
-#CC  -O3 rwx.o parallel_sz3_theta.c -o parallel_qoz -I $qozsrc -L $qozlib -I $zstdsrc -L $zstdlib -l zstd -lm 
-
-
+CC  -O3 rwx.o parallel_qoz_theta.c -o parallel_qoz -I $qozsrc -L $qozlib -I $zstdsrc -L $zstdlib -l zstd -lm 
 
 
-#cc -std=c99 -O3 rw.o parallel_zfp_theta.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
+
+
+cc -std=c99 -O3 rw.o parallel_zfp_theta.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
 #echo $metalib
 #ls $metalib
 #ld  -L $metalib -l sz_cpp --verbose
