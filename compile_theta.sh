@@ -4,7 +4,7 @@
 #module load gcc/8.2.0-g7hppkz
 #module load mpich
 #module load zstd/1.4.5-uxapdkl
-#rm parallel_zfp parallel_sz2 parallel_sz3 parallel_mgard parallel_qoz
+rm parallel_zfp parallel_sz2 parallel_sz3 parallel_mgard parallel_qoz
 #export LD_LIBRARY_PATH=$HOME/packages/SZcpp/lib64:$LD_LIBRARY_PATH
 szsrc=$HOME/packages/SZ/include
 szlib=$HOME/packages/SZ/lib/
