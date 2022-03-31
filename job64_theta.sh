@@ -2,7 +2,7 @@
 echo wait .... 30 seconds
 sleep 30
 echo date=`date`
-cd lossycompression/parallel_compressor_eval
+cd $HOME/lossycompression/parallel_compressor_eval
 
 # Hurricane
 aprun -n 64 ./parallel_sz2 13 496 496 96
