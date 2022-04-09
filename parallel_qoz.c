@@ -101,7 +101,7 @@ int main(int argc, char * argv[])
     char salt_file[51][50];
     double salt_rel_bound[51];
     for (int i=0;i<51;i++){
-        char name[100];
+        char name[50];
         sprintf(name,"segSalt-%d.bin",100*i);
         salt_file[i]=name;
         salt_rel_bound[i]=1e-4;
