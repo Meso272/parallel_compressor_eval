@@ -20,8 +20,8 @@ zstdsrc=$HOME/packages/zstd/include
 zstdlib=$HOME/packages/zstd/lib
 metasrc=$HOME/packages/meta_compressor/include/sz_cpp   
 metalib=$HOME/packages/meta_compressor/lib64
-qozsrc=$HOME/packages/SZ3_test/include
-qozlib=$HOME/packages/SZ3_test/lib64/
+qozsrc=$HOME/packages/QoZ/include
+qozlib=$HOME/packages/QoZ/lib64/
 gcc -c rw.c
 g++ -c rw.c -o rwx.o
 

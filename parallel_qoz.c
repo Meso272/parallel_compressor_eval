@@ -95,6 +95,18 @@ int main(int argc, char * argv[])
                                 "pressure_truncated.bin.dat", "velocityz_truncated.bin.dat", "viscocity_truncated.bin.dat",
                                 "diffusivity_truncated.bin.dat"};
     double miranda_rel_bound[7] = {2e-3, 2e-3, 2e-3, 2e-3, 2e-3, 2e-3, 2e-3};
+    
+
+    int salt_num_vars = 51;
+    char salt_file[51][50];
+    double salt_rel_bound[51];
+    for (int i=0;i<51;i++){
+        char name[100];
+        sprintf(name,"segSalt-%d.bin",100*i);
+        salt_file[i]=name;
+        salt_rel_bound[i]=1e-4;
+
+    }
     // assignment
     char file[20][50];
     double *rel_bound;
@@ -110,7 +122,11 @@ int main(int argc, char * argv[])
     } else if (num_vars == miranda_num_vars) {
         for (int i = 0; i < num_vars; i++) strcpy(file[i], miranda_file[i]);
         rel_bound = miranda_rel_bound;
-    } else {
+    } else if (num_vars == salt_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], salt_file[i]);
+        rel_bound = salt_rel_bound;
+    }
+    else {
         printf("No such variable, exit\n");
 //        SZ_Finalize();
         MPI_Finalize();
