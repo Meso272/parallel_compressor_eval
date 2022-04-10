@@ -171,12 +171,12 @@ int main(int argc, char * argv[])
 			start = MPI_Wtime();
 			dataIn = readFloatData(filename, &nbEle, &status);
 			end = MPI_Wtime();
-			//printf("file %s read time: %.2f\n", filename, end - start);
+			printf("file %s read time: %.2f\n", filename, end - start);
 			start = MPI_Wtime();
 			MPI_Bcast(&nbEle, 1, MPI_UNSIGNED_LONG_LONG, 0, MPI_COMM_WORLD);
 			MPI_Bcast(dataIn, nbEle, MPI_FLOAT, 0, MPI_COMM_WORLD);
 			end = MPI_Wtime();
-			//printf("broadcast time: %.2f\n", end - start);
+			printf("broadcast time: %.2f\n", end - start);
 
 		}
 		else{
@@ -193,7 +193,7 @@ int main(int argc, char * argv[])
 		// Compress Input Data
 		size_t out_size;
 
-		//if (world_rank == 0) printf ("Compressing %s\n", filename);
+		if (world_rank == 0) printf ("Compressing %s\n", filename);
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0) start = MPI_Wtime();
 
@@ -225,7 +225,7 @@ int main(int argc, char * argv[])
   
 	// Write Compressed Data
 	MPI_Barrier(MPI_COMM_WORLD);
-    //if (world_rank == 0) printf("write compressed file to disk %s \n", zip_filename);
+    if (world_rank == 0) printf("write compressed file to disk %s \n", zip_filename);
     if(world_rank == 0) start = MPI_Wtime();
 	writeByteData(compressed_output, total_size, zip_filename, &status);
     //printf ("write %d end.\n", world_rank);
@@ -238,7 +238,7 @@ int main(int argc, char * argv[])
 	free(compressed_output);
 	// Read Compressed Data
     MPI_Barrier(MPI_COMM_WORLD);
-    //if (world_rank == 0) printf("read compressed file from disk %s \n", zip_filename);
+    if (world_rank == 0) printf("read compressed file from disk %s \n", zip_filename);
     if(world_rank == 0) start = MPI_Wtime();
 	compressed_output = readByteData(zip_filename, &inSize, &status);
    // printf ("read %d end.\n", world_rank);
@@ -259,7 +259,7 @@ int main(int argc, char * argv[])
     for(int i=0; i<num_vars; i++){
 		// Decompress Compressed Data
         MPI_Barrier(MPI_COMM_WORLD);
-        //if (world_rank == 0) printf("decompress %d-th field\n", i);
+        if (world_rank == 0) printf("decompress %d-th field\n", i);
         if(world_rank == 0) start = MPI_Wtime();
         float *dataOut = SZ_decompress<float>(conf,(char*)compressed_output_pos, compressed_size[i]);
         //printf ("decomp %d end.\n", world_rank);
