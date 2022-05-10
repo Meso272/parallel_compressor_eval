@@ -15,7 +15,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "SZ3/api/sz.hpp"
+#include "QoZ/api/sz.hpp"
 #include "rw.h"
 #include "mpi.h"
 
@@ -37,8 +37,8 @@ int main(int argc, char * argv[])
 	
 	if(argc < 3)
 	{
-		printf("Test case: parallel_sz3 [config_file] num_vars [dimension sizes...]\n");
-		printf("Example: parallel_sz3 sz.config 7 384 384 256\n");
+		printf("Test case: parallel_qoz [config_file] num_vars [dimension sizes...]\n");
+		printf("Example: parallel_qoz sz.config 7 384 384 256\n");
 		exit(0);
 	}
 
@@ -148,20 +148,20 @@ int main(int argc, char * argv[])
 	unsigned char * compressed_output_pos = compressed_output;
 	int folder_index = world_rank;
     
-    SZ::Config conf;
+    QoZ::Config conf;
     if (r2 == 0) {
-        conf = SZ::Config(r1);
+        conf = QoZ::Config(r1);
     } else if (r3 == 0) {
-        conf = SZ::Config(r2, r1);
+        conf = QoZ::Config(r2, r1);
     } else if (r4 == 0) {
-        conf = SZ::Config(r3, r2, r1);
+        conf = QoZ::Config(r3, r2, r1);
     } else {
-        conf = SZ::Config(r4, r3, r2, r1);
+        conf = QoZ::Config(r4, r3, r2, r1);
     }
     if (cfgFile!=NULL) {
         conf.loadcfg(cfgFile);
     }
-    conf.errorBoundMode=SZ::EB_REL;
+    conf.errorBoundMode=QoZ::EB_REL;
 
 	for(int i=0; i<num_vars; i++){
 		sprintf(filename, "%s/%d/%s", folder, folder_index, file[i]);
@@ -220,7 +220,7 @@ int main(int argc, char * argv[])
     if (stat("/lcrc/globalscratch/jinyang", &st) == -1) {
         mkdir("/lcrc/globalscratch/jinyang", 0777);
     }
-    sprintf(zip_filename, "%s/sz3_%d_%d.out", "/lcrc/globalscratch/jinyang", folder_index, rand());	// Write Compressed Data
+    sprintf(zip_filename, "%s/qoz_%d_%d.out", "/lcrc/globalscratch/jinyang", folder_index, rand());	// Write Compressed Data
     size_t total_size = compressed_output_pos - compressed_output;
   
 	// Write Compressed Data
