@@ -37,23 +37,24 @@ int main(int argc, char * argv[])
 	
 	if(argc < 3)
 	{
-		printf("Test case: parallel_qoz [config_file] num_vars [dimension sizes...]\n");
-		printf("Example: parallel_qoz sz.config 7 384 384 256\n");
+		printf("Test case: parallel_qoz [config_file] [eb] num_vars [dimension sizes...]\n");
+		printf("Example: parallel_qoz sz.config 1e-3 7 384 384 256\n");
 		exit(0);
 	}
 
 	cfgFile=argv[1];
+    double eb=atof(argv[2]);
 	
 	if(argc>=4)
-	  r1 = atoi(argv[3]); //8
+	  r1 = atoi(argv[4]); //8
 	if(argc>=5)
-	  r2 = atoi(argv[4]); //8
+	  r2 = atoi(argv[5]); //8
 	if(argc>=6)
-	  r3 = atoi(argv[5]); //128
+	  r3 = atoi(argv[6]); //128
 	if(argc>=7)
-	  r4 = atoi(argv[6]);
+	  r4 = atoi(argv[7]);
 	if(argc>=8)
-	  r5 = atoi(argv[7]);
+	  r5 = atoi(argv[8]);
 	
 //	SZ_Init(NULL);
 
@@ -63,7 +64,7 @@ int main(int argc, char * argv[])
 	double costReadOri = 0.0, costReadZip = 0.0, costWriteZip = 0.0, costWriteOut = 0.0, costComp = 0.0, costDecomp = 0.0;
 
 	MPI_Barrier(MPI_COMM_WORLD);
-    int num_vars = atoi(argv[2]);
+    int num_vars = atoi(argv[3]);
 
     int qmcpack8h_num_vars = 2;
     char qmcpack8h_file[2][50] = {"spin_0_truncated.bin.dat", "spin_1_truncated.bin.dat"};
@@ -95,6 +96,16 @@ int main(int argc, char * argv[])
                                 "pressure_truncated.bin.dat", "velocityz_truncated.bin.dat", "viscocity_truncated.bin.dat",
                                 "diffusivity_truncated.bin.dat"};
     double miranda_rel_bound[7] = {2e-3, 2e-3, 2e-3, 2e-3, 2e-3, 2e-3, 2e-3};
+
+    int scale_num_vars = 12;
+    char scale_file[12][50] = {"PRES-98x1200x1200.dat", "QC-98x1200x1200.log10.dat", "QG-98x1200x1200.log10.dat",
+                                   "QI-98x1200x1200.log10.dat", "QR-98x1200x1200.log10.dat", "QS-98x1200x1200.log10.dat",
+                                   "QV-98x1200x1200.log10.dat", "RH-98x1200x1200.dat", "T-98x1200x1200.dat",
+                                   "U-98x1200x1200.dat", "V-98x1200x1200.dat", "W-98x1200x1200.dat",
+                                  };
+    double scale_rel_bound[12] ={1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
+
+
     
 
     int salt_num_vars = 51;
@@ -107,8 +118,21 @@ int main(int argc, char * argv[])
         salt_rel_bound[i]=1e-4;
 
     }
+
+    int aramco_num_vars = 60;
+    char armaco_file[60][50];
+    double aramco_rel_bound[60];
+    for (int i=0;i<60;i++){
+        //char name[50];
+        sprintf(salt_file[i],"aramco-snapshot-%d.f32",1000+10*i);
+        //salt_file[i]=name;
+        aramco_rel_bound[i]=1e-4;
+
+    }
+
+
     // assignment
-    char file[20][50];
+    char file[100][50];
     double *rel_bound;
     if (num_vars == qmcpack6k_num_vars) {
         for (int i = 0; i < num_vars; i++) strcpy(file[i], qmacpack6k_file[i]);
@@ -165,7 +189,9 @@ int main(int argc, char * argv[])
 
 	for(int i=0; i<num_vars; i++){
 		sprintf(filename, "%s/%d/%s", folder, folder_index, file[i]);
-        conf.relErrorBound = rel_bound[i];
+        //conf.relErrorBound = rel_bound[i];
+        conf.relErrorBound = eb;
+        //changed to use 
 		// Read Input Data
 		if(world_rank == 0){
 			start = MPI_Wtime();
