@@ -32,15 +32,15 @@ g++ -c rw.c -o rwx.o
 
 # mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I$szsrc $szlib/libSZ.a $szlib/libzstd.a $szlib/libzlib.a -lm
 
-mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I $szsrc -L $szlib -l SZ -l zstd -lm
+#mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I $szsrc -L $szlib -l SZ -l zstd -lm
 
-mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib  -l zstd -lm
+#mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib  -l zstd -lm
 
 mpicxx  -std=c++17 -O3 rwx.o parallel_qoz.c -o parallel_qoz -I $qozsrc -L $qozlib -I $pythonsrc -L $pythonlib  -l python3.8  -I $pybind11src -L $pybind11lib  -l zstd -lm 
 
 
 
 
-mpicc -std=c99 -O3 rw.o parallel_zfp.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
+#mpicc -std=c99 -O3 rw.o parallel_zfp.c -o parallel_zfp -I $zfpsrc -L $zfplib -l zfp -lm
 
-mpicxx  -O3 rwx.o parallel_mgard.c -o parallel_mgard -I $mgardsrc  -I $metasrc -L $metalib -l sz_cpp -l zstd -lm
+#mpicxx  -O3 rwx.o parallel_mgard.c -o parallel_mgard -I $mgardsrc  -I $metasrc -L $metalib -l sz_cpp -l zstd -lm
