@@ -22,6 +22,8 @@ metasrc=$HOME/packages/meta_compressor/include/sz_cpp
 metalib=$HOME/packages/meta_compressor/lib64
 qozsrc=$HOME/packages/QoZ/include
 qozlib=$HOME/packages/QoZ/lib64/
+pythonsrc=$HOME/miniconda3/pkgs/python-3.8.5-h7579374_1/include
+pythonlib=$HOME/miniconda3/pkgs/python-3.8.5-h7579374_1/lib
 pybind11src=$HOME/miniconda3/pkgs/pybind11-2.6.1-py38h82cb98a_0/include
 pybind11lib=$HOME/miniconda3/pkgs/pybind11-2.6.1-py38h82cb98a_0/lib
 gcc -c rw.c
@@ -33,7 +35,7 @@ mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I $szsrc -L $szlib -l SZ
 
 mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib  -l zstd -lm
 
-mpicxx  -O3 rwx.o parallel_qoz.c -o parallel_qoz -I $qozsrc -L $qozlib  -I $pybind11src -L $pybind11lib  -l zstd -lm 
+mpicxx  -O3 rwx.o parallel_qoz.c -o parallel_qoz -I $qozsrc -L $qozlib -I $pythonsrc -L $pythonlib    -I $pybind11src -L $pybind11lib  -l zstd -lm 
 
 
 
