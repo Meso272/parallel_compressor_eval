@@ -4,6 +4,7 @@ module purge
 module load gcc/8.2.0-g7hppkz
 module load mpich
 module load zstd/1.4.5-uxapdkl
+module load python/intel-parallel-studio-cluster.2019.5-zqvneip/3.6.9
 rm parallel_zfp parallel_sz2 parallel_sz3 parallel_mgard parallel_qoz
 
 szsrc=$HOME/packages/SZ2/include
@@ -35,7 +36,7 @@ mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I $szsrc -L $szlib -l SZ
 
 mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib  -l zstd -lm
 
-mpicxx  -std=c++17 -O3 rwx.o parallel_qoz.c -o parallel_qoz -I $qozsrc -L $qozlib -I $pythonsrc -L $pythonlib  -l python38  -I $pybind11src -L $pybind11lib  -l zstd -lm 
+mpicxx  -std=c++17 -O3 rwx.o parallel_qoz.c -o parallel_qoz -I $qozsrc -L $qozlib -I $pythonsrc -L $pythonlib  -l python  -I $pybind11src -L $pybind11lib  -l zstd -lm 
 
 
 
