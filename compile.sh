@@ -36,7 +36,7 @@ mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I $szsrc -L $szlib -l SZ
 
 mpicxx  -O3 rwx.o parallel_sz3.c -o parallel_sz3 -I $sz3src -L $sz3lib  -l zstd -lm
 
-mpicxx  -std=c++17 -O3 rwx.o parallel_qoz.c -o parallel_qoz -I $qozsrc -L $qozlib -I $pythonsrc -L $pythonlib  -l python  -I $pybind11src -L $pybind11lib  -l zstd -lm 
+mpicxx  -std=c++17 -O3 rwx.o parallel_qoz.c -o parallel_qoz -I $qozsrc -L $qozlib -I $pythonsrc -L $pythonlib    -I $pybind11src -L $pybind11lib  -l zstd -lm 
 
 
 
