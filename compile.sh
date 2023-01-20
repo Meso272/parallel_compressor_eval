@@ -4,7 +4,7 @@ module purge
 module load gcc/8.2.0-g7hppkz
 module load mpich
 module load zstd/1.4.5-uxapdkl
-module load python/intel-parallel-studio-cluster.2019.5-zqvneip/3.6.9
+#module load python/intel-parallel-studio-cluster.2019.5-zqvneip/3.6.9
 rm parallel_zfp parallel_sz2 parallel_sz3 parallel_mgard parallel_qoz
 
 szsrc=$HOME/packages/SZ2/include
@@ -24,7 +24,7 @@ metalib=$HOME/packages/meta_compressor/lib64
 qozsrc=$HOME/packages/QoZ/include
 qozlib=$HOME/packages/QoZ/lib64/
 pythonsrc=$HOME/miniconda3/pkgs/python-3.8.5-h7579374_1/include/python3.8
-pythonlib=$HOME/miniconda3/pkgs/python-3.8.5-h7579374_1/lib
+pythonlib=$HOME/miniconda3/pkgs/python-3.8.5-h7579374_1/lib/python3.8
 pybind11src=$HOME/miniconda3/pkgs/pybind11-2.6.1-py38h82cb98a_0/include
 pybind11lib=$HOME/miniconda3/pkgs/pybind11-2.6.1-py38h82cb98a_0/lib
 gcc -c rw.c
