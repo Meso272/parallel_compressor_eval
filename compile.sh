@@ -30,7 +30,7 @@ pybind11lib=$HOME/miniconda3/pkgs/pybind11-2.6.1-py38h82cb98a_0/lib
 gcc -c rw.c
 g++ -c rw.c -o rwx.o
 
- mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I$szsrc $szlib/libSZ.a $szlib/libzstd.a $szlib/libzlib.a -lm
+#mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I$szsrc $szlib/libSZ.a $szlib/libzstd.a $szlib/libzlib.a -lm
 
 mpicc -std=c99 -O3 rw.o parallel_sz2.c -o parallel_sz2 -I $szsrc -L $szlib -l SZ -l zstd -lm
 
