@@ -47,15 +47,15 @@ int main(int argc, char * argv[])
     double eb=atof(argv[2]);
     printf("3\n");
 	
-	if(argc>=4)
-	  r1 = atoi(argv[4]); //8
 	if(argc>=5)
-	  r2 = atoi(argv[5]); //8
+	  r1 = atoi(argv[4]); //8
 	if(argc>=6)
-	  r3 = atoi(argv[6]); //128
+	  r2 = atoi(argv[5]); //8
 	if(argc>=7)
-	  r4 = atoi(argv[7]);
+	  r3 = atoi(argv[6]); //128
 	if(argc>=8)
+	  r4 = atoi(argv[7]);
+	if(argc>=9)
 	  r5 = atoi(argv[8]);
 
     printf("4\n");
