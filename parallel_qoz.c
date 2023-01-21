@@ -237,7 +237,7 @@ int main(int argc, char * argv[])
 		if(world_rank == 0) start = MPI_Wtime();
 
         char *bytesOut = SZ_compress<float>(conf, dataIn, compressed_size[i]);
-        //printf ("Compressing %d end.\n", world_rank);
+        printf ("Compressing %d end.\n", world_rank);
       
 //		unsigned char *bytesOut = SZ_compress_args(SZ_FLOAT, dataIn, &compressed_size[i], REL, 0, rel_bound[i], 0, r5, r4, r3, r2, r1);
 		MPI_Barrier(MPI_COMM_WORLD);
@@ -247,14 +247,14 @@ int main(int argc, char * argv[])
 		}
 		free (dataIn);
 		memcpy(compressed_output_pos, bytesOut, compressed_size[i]);
-        //printf ("memcpy %d end.\n", world_rank);
+        printf ("memcpy %d end.\n", world_rank);
       
 		compressed_output_pos += compressed_size[i];
 		free(bytesOut);
       
 
 	}
-    //printf ("total %d end.\n", world_rank);
+    printf ("total %d end.\n", world_rank);
     struct stat st = {0};
     if (stat("/lcrc/globalscratch/jinyang", &st) == -1) {
         mkdir("/lcrc/globalscratch/jinyang", 0777);

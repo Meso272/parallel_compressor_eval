@@ -65,6 +65,7 @@ int main(int argc, char * argv[])
 
 	MPI_Barrier(MPI_COMM_WORLD);
     int num_vars = atoi(argv[3]);
+   
 
     int qmcpack8h_num_vars = 2;
     char qmcpack8h_file[2][50] = {"spin_0_truncated.bin.dat", "spin_1_truncated.bin.dat"};
