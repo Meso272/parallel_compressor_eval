@@ -85,7 +85,7 @@ int main(int argc, char * argv[])
 
     // Hurricane
     int hurricane_num_vars = 13;
-    char hurricane_file[13][50] = {"Uf48.bin.dat", "Vf48.dat", "Wf48.bin.dat",
+    char hurricane_file[13][50] = {"Uf48.bin.dat", "Vf48.bin.dat", "Wf48.bin.dat",
                                    "TCf48.bin.dat", "Pf48.bin.dat", "QVAPORf48.bin.dat",
                                    "CLOUDf48_log10.bin.dat", "QCLOUDf48_log10.bin.dat", "QICEf48_log10.bin.dat",
                                    "QRAINf48_log10.bin.dat", "QSNOWf48_log10.bin.dat", "QGRAUPf48_log10.bin.dat",
