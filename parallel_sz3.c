@@ -95,8 +95,28 @@ int main(int argc, char * argv[])
                                 "pressure_truncated.bin.dat", "velocityz_truncated.bin.dat", "viscocity_truncated.bin.dat",
                                 "diffusivity_truncated.bin.dat"};
     double miranda_rel_bound[7] = {1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
+
+     int scale_num_vars = 12;
+    char scale_file[12][50] = {"PRES-98x1200x1200.dat", "QC-98x1200x1200.log10.dat", "QG-98x1200x1200.log10.dat",
+                                   "QI-98x1200x1200.log10.dat", "QR-98x1200x1200.log10.dat", "QS-98x1200x1200.log10.dat",
+                                   "QV-98x1200x1200.log10.dat", "RH-98x1200x1200.dat", "T-98x1200x1200.dat",
+                                   "U-98x1200x1200.dat", "V-98x1200x1200.dat", "W-98x1200x1200.dat",
+                                  };
+    double scale_rel_bound[12] ={1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
+
+    int aramco_num_vars = 60;
+    char armaco_file[60][50];
+    double aramco_rel_bound[60];
+    for (int i=0;i<60;i++){
+        //char name[50];
+        sprintf(aramco_file[i],"aramco-snapshot-%d.f32",1000+10*i);
+        //salt_file[i]=name;
+        aramco_rel_bound[i]=1e-3;
+
+    }
+
     // assignment
-    char file[20][50];
+    char file[100][50];
     double *rel_bound;
     if (num_vars == qmcpack6k_num_vars) {
         for (int i = 0; i < num_vars; i++) strcpy(file[i], qmacpack6k_file[i]);
@@ -110,7 +130,16 @@ int main(int argc, char * argv[])
     } else if (num_vars == miranda_num_vars) {
         for (int i = 0; i < num_vars; i++) strcpy(file[i], miranda_file[i]);
         rel_bound = miranda_rel_bound;
-    } else {
+    } 
+    else if (num_vars == scale_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], scale_file[i]);
+        rel_bound = scale_rel_bound;
+    }
+    else if (num_vars == aramco_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], aramco_file[i]);
+        rel_bound = aramco_rel_bound;
+    }
+    else {
         printf("No such variable, exit\n");
 //        SZ_Finalize();
         MPI_Finalize();

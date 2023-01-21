@@ -124,9 +124,9 @@ int main(int argc, char * argv[])
     double aramco_rel_bound[60];
     for (int i=0;i<60;i++){
         //char name[50];
-        sprintf(salt_file[i],"aramco-snapshot-%d.f32",1000+10*i);
+        sprintf(aramco_file[i],"aramco-snapshot-%d.f32",1000+10*i);
         //salt_file[i]=name;
-        aramco_rel_bound[i]=1e-4;
+        aramco_rel_bound[i]=1e-3;
 
     }
 
@@ -149,6 +149,14 @@ int main(int argc, char * argv[])
     } else if (num_vars == salt_num_vars) {
         for (int i = 0; i < num_vars; i++) strcpy(file[i], salt_file[i]);
         rel_bound = salt_rel_bound;
+    }
+    else if (num_vars == scale_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], scale_file[i]);
+        rel_bound = scale_rel_bound;
+    }
+    else if (num_vars == aramco_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], aramco_file[i]);
+        rel_bound = aramco_rel_bound;
     }
     else {
         printf("No such variable, exit\n");

@@ -143,9 +143,30 @@ int main(int argc, char* argv[]) {
                                 "diffusivity_truncated.bin.dat"};
     double miranda_abs_bound[7] = {0.1317327, 0.135345, 0.06, 0.1324284, 0.4246152, 0.0786399, 0.07845450000000001};
 
+    int scale_num_vars = 12;
+    char scale_file[12][50] = {"PRES-98x1200x1200.dat", "QC-98x1200x1200.log10.dat", "QG-98x1200x1200.log10.dat",
+                                   "QI-98x1200x1200.log10.dat", "QR-98x1200x1200.log10.dat", "QS-98x1200x1200.log10.dat",
+                                   "QV-98x1200x1200.log10.dat", "RH-98x1200x1200.dat", "T-98x1200x1200.dat",
+                                   "U-98x1200x1200.dat", "V-98x1200x1200.dat", "W-98x1200x1200.dat",
+                                  };
+    double scale_rel_bound[12] ={1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
+
+    int aramco_num_vars = 60;
+    char armaco_file[60][50];
+    double aramco_abs_bound[60];
+    for (int i=0;i<60;i++){
+        //char name[50];
+        sprintf(aramco_file[i],"aramco-snapshot-%d.f32",1000+10*i);
+        //salt_file[i]=name;
+        aramco_abs_bound[i]=1e-3;
+
+    }
 
 
-    char file[20][50];
+
+
+
+    char file[100][50];
     
     
     if (num_vars == hurricane_num_vars) {
@@ -154,7 +175,16 @@ int main(int argc, char* argv[]) {
     } else if (num_vars == miranda_num_vars) {
         for (int i = 0; i < num_vars; i++) strcpy(file[i], miranda_file[i]);
         absbound = miranda_abs_bound;
-    } else {
+    } 
+    else if (num_vars == scale_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], scale_file[i]);
+        rel_bound = scale_abs_bound;
+    }
+    else if (num_vars == aramco_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], aramco_file[i]);
+        rel_bound = aramco_abs_bound;
+    }
+    else {
         printf("No such variable, exit\n");
 //        SZ_Finalize();
         MPI_Finalize();
