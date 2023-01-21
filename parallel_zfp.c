@@ -149,7 +149,7 @@ int main(int argc, char* argv[]) {
                                    "QV-98x1200x1200.log10.dat", "RH-98x1200x1200.dat", "T-98x1200x1200.dat",
                                    "U-98x1200x1200.dat", "V-98x1200x1200.dat", "W-98x1200x1200.dat",
                                   };
-    double scale_rel_bound[12] ={1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
+    double scale_abs_bound[12] ={1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
 
     int aramco_num_vars = 60;
     char aramco_file[60][50];
@@ -178,11 +178,11 @@ int main(int argc, char* argv[]) {
     } 
     else if (num_vars == scale_num_vars) {
         for (int i = 0; i < num_vars; i++) strcpy(file[i], scale_file[i]);
-        rel_bound = scale_abs_bound;
+        absbound = scale_abs_bound;
     }
     else if (num_vars == aramco_num_vars) {
         for (int i = 0; i < num_vars; i++) strcpy(file[i], aramco_file[i]);
-        rel_bound = aramco_abs_bound;
+        absbound = aramco_abs_bound;
     }
     else {
         printf("No such variable, exit\n");
