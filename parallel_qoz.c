@@ -43,7 +43,9 @@ int main(int argc, char * argv[])
 	}
 
 	cfgFile=argv[1];
+    printf("2\n");
     double eb=atof(argv[2]);
+    printf("3\n");
 	
 	if(argc>=4)
 	  r1 = atoi(argv[4]); //8
@@ -55,11 +57,14 @@ int main(int argc, char * argv[])
 	  r4 = atoi(argv[7]);
 	if(argc>=8)
 	  r5 = atoi(argv[8]);
+
+    printf("4\n");
 	
 //	SZ_Init(NULL);
 
 	if (world_rank == 0) printf ("Start parallel compressing ... \n");
 	if (world_rank == 0) printf("size: %d\n", world_size);
+    printf("5\n");
 	double start, end;
 	double costReadOri = 0.0, costReadZip = 0.0, costWriteZip = 0.0, costWriteOut = 0.0, costComp = 0.0, costDecomp = 0.0;
 
