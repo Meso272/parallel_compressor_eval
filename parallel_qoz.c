@@ -89,11 +89,11 @@ int main(int argc, char * argv[])
 
     // Hurricane
     int hurricane_num_vars = 13;
-    char hurricane_file[13][50] = {"Uf48_truncated.bin.dat", "Vf48_truncated.bin.dat", "Wf48_truncated.bin.dat",
-                                   "TCf48_truncated.bin.dat", "Pf48_truncated.bin.dat", "QVAPORf48_truncated.bin.dat",
-                                   "CLOUDf48_log10_truncated.bin.dat", "QCLOUDf48_log10_truncated.bin.dat", "QICEf48_log10_truncated.bin.dat",
-                                   "QRAINf48_log10_truncated.bin.dat", "QSNOWf48_log10_truncated.bin.dat", "QGRAUPf48_log10_truncated.bin.dat",
-                                   "PRECIPf48_log10_truncated.bin.dat"};
+    char hurricane_file[13][50] = {"Uf48.bin.dat", "Vf48.dat", "Wf48.bin.dat",
+                                   "TCf48.bin.dat", "Pf48.bin.dat", "QVAPORf48.bin.dat",
+                                   "CLOUDf48_log10.bin.dat", "QCLOUDf48_log10.bin.dat", "QICEf48_log10.bin.dat",
+                                   "QRAINf48_log10.bin.dat", "QSNOWf48_log10.bin.dat", "QGRAUPf48_log10.bin.dat",
+                                   "PRECIPf48_log10.bin.dat"};
     double hurricane_rel_bound[13] ={1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
     // miranda
     int miranda_num_vars = 7;

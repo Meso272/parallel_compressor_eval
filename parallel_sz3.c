@@ -43,17 +43,18 @@ int main(int argc, char * argv[])
 	}
 
 	cfgFile=argv[1];
+    double eb=atof(argv[2]);
 	
-	if(argc>=4)
-	  r1 = atoi(argv[3]); //8
 	if(argc>=5)
-	  r2 = atoi(argv[4]); //8
+	  r1 = atoi(argv[4]); //8
 	if(argc>=6)
-	  r3 = atoi(argv[5]); //128
+	  r2 = atoi(argv[5]); //8
 	if(argc>=7)
-	  r4 = atoi(argv[6]);
+	  r3 = atoi(argv[6]); //128
 	if(argc>=8)
-	  r5 = atoi(argv[7]);
+	  r4 = atoi(argv[7]);
+	if(argc>=9)
+	  r5 = atoi(argv[8]);
 	
 //	SZ_Init(NULL);
 
@@ -63,7 +64,7 @@ int main(int argc, char * argv[])
 	double costReadOri = 0.0, costReadZip = 0.0, costWriteZip = 0.0, costWriteOut = 0.0, costComp = 0.0, costDecomp = 0.0;
 
 	MPI_Barrier(MPI_COMM_WORLD);
-    int num_vars = atoi(argv[2]);
+    int num_vars = atoi(argv[3]);
 
     int qmcpack8h_num_vars = 2;
     char qmcpack8h_file[2][50] = {"spin_0_truncated.bin.dat", "spin_1_truncated.bin.dat"};
@@ -83,12 +84,12 @@ int main(int argc, char * argv[])
 
     // Hurricane
     int hurricane_num_vars = 13;
-    char hurricane_file[13][50] = {"Uf48_truncated.bin.dat", "Vf48_truncated.bin.dat", "Wf48_truncated.bin.dat",
-                                   "TCf48_truncated.bin.dat", "Pf48_truncated.bin.dat", "QVAPORf48_truncated.bin.dat",
-                                   "CLOUDf48_log10_truncated.bin.dat", "QCLOUDf48_log10_truncated.bin.dat", "QICEf48_log10_truncated.bin.dat",
-                                   "QRAINf48_log10_truncated.bin.dat", "QSNOWf48_log10_truncated.bin.dat", "QGRAUPf48_log10_truncated.bin.dat",
-                                   "PRECIPf48_log10_truncated.bin.dat"};
-    double hurricane_rel_bound[13] ={8e-4, 8e-4, 8e-4, 8e-4, 8e-4, 8e-4, 8e-4, 8e-4,8e-4, 8e-4, 8e-4, 8e-4, 8e-4};
+    char hurricane_file[13][50] = {"Uf48.bin.dat", "Vf48.dat", "Wf48.bin.dat",
+                                   "TCf48.bin.dat", "Pf48.bin.dat", "QVAPORf48.bin.dat",
+                                   "CLOUDf48_log10.bin.dat", "QCLOUDf48_log10.bin.dat", "QICEf48_log10.bin.dat",
+                                   "QRAINf48_log10.bin.dat", "QSNOWf48_log10.bin.dat", "QGRAUPf48_log10.bin.dat",
+                                   "PRECIPf48_log10.bin.dat"};
+    double hurricane_rel_bound[13] ={7e-4, 7e-4, 7e-4, 7e-4, 7e-4, 7e-4, 7e-4, 7e-4,7e-4, 7e-4, 7e-4, 7e-4, 7e-4};
     // miranda
     int miranda_num_vars = 7;
     char miranda_file[7][50] = {"velocityy_truncated.bin.dat", "velocityx_truncated.bin.dat", "density_truncated.bin.dat",
@@ -178,7 +179,8 @@ int main(int argc, char * argv[])
 
 	for(int i=0; i<num_vars; i++){
 		sprintf(filename, "%s/%d/%s", folder, folder_index, file[i]);
-        conf.relErrorBound = rel_bound[i];
+        //conf.relErrorBound = rel_bound[i];
+        conf.relErrorBound = eb;
 		// Read Input Data
 		if(world_rank == 0){
 			start = MPI_Wtime();
