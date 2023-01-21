@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=p8192
+#SBATCH --job-name=p16384
 #SBATCH -p bdwall
 #SBATCH -A ECP-EZ
-#SBATCH --nodes 256
+#SBATCH --nodes 512
 #SBATCH --ntasks-per-node=32
 #SBATCH --time=70:00:00
-#SBATCH -o p8192.%j.%N.out
-#SBATCH -e p8192.%j.%N.error
+#SBATCH -o p16384.%j.%N.out
+#SBATCH -e p16384.%j.%N.error
 
 echo wait .... 30 seconds
 sleep 30
