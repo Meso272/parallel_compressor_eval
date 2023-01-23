@@ -18,13 +18,13 @@ echo date=`date`
 #srun ./parallel_zfp 13 496 496 96
 #srun ./parallel_mgard 13 496 496 96
 printf "HurricaneG1\n"
-srun ./parallel_sz3 sz3.config 7e-4 13 500 500 100
+srun ./parallel_sz3 sz3.config 4e-4 13 500 500 100
 printf "SZ3 END\n"
-srun ./parallel_qoz  qoz.config 8e-4 13 500 500 100
+srun ./parallel_qoz  qoz.config 4e-4 13 500 500 100
 printf "QOZ END\n"
-srun ./parallel_qoz  sperr.config 1e-3 13 500 500 100
+srun ./parallel_qoz  sperr.config 5e-4 13 500 500 100
 printf "SPERR END\n"
-srun ./parallel_qoz  fz.config 1e-3 13 500 500 100
+srun ./parallel_qoz  fz.config 6e-4 13 500 500 100
 printf "FZ END\n"
 
 printf "HurricaneG2\n"
@@ -34,7 +34,17 @@ srun ./parallel_qoz  qoz.config 3e-4 13 500 500 100
 printf "QOZ END\n"
 srun ./parallel_qoz  sperr.config 4e-4 13 500 500 100
 printf "SPERR END\n"
-srun ./parallel_qoz  fz.config 4e-4 13 500 500 100
+srun ./parallel_qoz  fz.config 5e-4 13 500 500 100
+printf "FZ END\n"
+
+printf "HurricaneG3\n"
+srun ./parallel_sz3 sz3.config 5e-4 13 500 500 100
+printf "SZ3 END\n"
+srun ./parallel_qoz  qoz.config 5e-4 13 500 500 100
+printf "QOZ END\n"
+srun ./parallel_qoz  sperr.config 7e-4 13 500 500 100
+printf "SPERR END\n"
+srun ./parallel_qoz  fz.config 7e-4 13 500 500 100
 printf "FZ END\n"
 
 # miranda
