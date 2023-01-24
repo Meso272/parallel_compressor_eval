@@ -73,13 +73,13 @@ printf "FZ END\n"
 #printf "FZ END\n"
 
 #printf "ARAMCO\n"
-#srun ./parallel_sz3 sz3.config 60 235 449 449
+#srun ./parallel_sz3 sz3.config 4e-5 60 235 449 449
 #printf "SZ3 END\n"
-#srun ./parallel_qoz qoz_b16.config 1e-3 60 235 449 449
+#srun ./parallel_qoz qoz.config 5e-5 60 235 449 449
 #printf "QOZ END\n"
-#srun ./parallel_qoz  sperr.config 1e-3  60 235 449 449
+#srun ./parallel_qoz  sperr.config 8e-5  60 235 449 449
 #printf "SPERR END\n"
-#srun ./parallel_qoz  fz.config 1e-3 60 235 449 449
+#srun ./parallel_qoz  fz.config 1.2e-4 60 235 449 449
 #printf "FZ END\n"
 
 

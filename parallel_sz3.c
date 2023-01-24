@@ -106,10 +106,10 @@ int main(int argc, char * argv[])
                                   };
     double scale_rel_bound[12] ={1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
 
-    int aramco_num_vars = 60;
-    char aramco_file[60][50];
-    double aramco_rel_bound[60];
-    for (int i=0;i<60;i++){
+    int aramco_num_vars = 50;
+    char aramco_file[50][50];
+    double aramco_rel_bound[50];
+    for (int i=0;i<50;i++){
         //char name[50];
         sprintf(aramco_file[i],"aramco-snapshot-%d.f32",1000+10*i);
         //salt_file[i]=name;
