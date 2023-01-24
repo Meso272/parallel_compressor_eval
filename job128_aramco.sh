@@ -16,13 +16,13 @@ echo date=`date`
 
 
 printf "ARAMCO\n"
-srun ./parallel_sz3 sz3.config 4e-5 60 235 449 449
+srun ./parallel_sz3 sz3.config 4e-5 50 235 449 449
 printf "SZ3 END\n"
-srun ./parallel_qoz qoz.config 5e-5 60 235 449 449
+srun ./parallel_qoz qoz.config 5e-5 50 235 449 449
 printf "QOZ END\n"
-srun ./parallel_qoz  sperr.config 8e-5 60 235 449 449
+srun ./parallel_qoz  sperr.config 8e-5 50 235 449 449
 printf "SPERR END\n"
-srun ./parallel_qoz  fz.config 2.2e-4 60 235 449 449
+srun ./parallel_qoz  fz.config 2.2e-4 50 235 449 449
 printf "FZ END\n"
 
 
