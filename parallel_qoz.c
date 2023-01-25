@@ -243,8 +243,10 @@ int main(int argc, char * argv[])
         if(eb>0)
             bytesOut= SZ_compress<float>(conf, dataIn, compressed_size[i]);
         else{
-            bytesOut=(char*) dataIn;
+            bytesOut=(char*)malloc(nbEle * sizeof(float));
             compressed_size[i]=nbEle * sizeof(float);
+            memcpy(bytesOut,(char*)dataIn,compressed_size[i]);
+            
         }
         //printf ("Compressing %d end.\n", world_rank);
       
