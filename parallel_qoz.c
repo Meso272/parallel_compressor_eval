@@ -179,8 +179,11 @@ int main(int argc, char * argv[])
 	size_t nbEle;
 	int status;
 	float * dataIn;
-
-	size_t est_compressed_size = r1 * r2 * r3 * sizeof(float) * num_vars / 5;
+    size_t est_compressed_size;
+    if(eb>0)
+	   est_compressed_size = r1 * r2 * r3 * sizeof(float) * num_vars / 5;
+    else
+       est_compressed_size = r1 * r2 * r3 * sizeof(float) * num_vars *1.05;
 	unsigned char * compressed_output = (unsigned char *) malloc(est_compressed_size);
 	unsigned char * compressed_output_pos = compressed_output;
 	int folder_index = world_rank;
@@ -236,7 +239,13 @@ int main(int argc, char * argv[])
 		MPI_Barrier(MPI_COMM_WORLD);
 		if(world_rank == 0) start = MPI_Wtime();
 
-        char *bytesOut = SZ_compress<float>(conf, dataIn, compressed_size[i]);
+        char *bytesOut;
+        if(eb>0)
+            bytesOut= SZ_compress<float>(conf, dataIn, compressed_size[i]);
+        else{
+            bytesOut=(char*) dataIn;
+            compressed_size[i]=nbEle * sizeof(float);
+        }
         //printf ("Compressing %d end.\n", world_rank);
       
 //		unsigned char *bytesOut = SZ_compress_args(SZ_FLOAT, dataIn, &compressed_size[i], REL, 0, rel_bound[i], 0, r5, r4, r3, r2, r1);
@@ -300,7 +309,14 @@ int main(int argc, char * argv[])
         MPI_Barrier(MPI_COMM_WORLD);
         //if (world_rank == 0) printf("decompress %d-th field\n", i);
         if(world_rank == 0) start = MPI_Wtime();
-        float *dataOut = SZ_decompress<float>(conf,(char*)compressed_output_pos, compressed_size[i]);
+        float *dataOut;
+        if(eb>0)
+            dataOut = SZ_decompress<float>(conf,(char*)compressed_output_pos, compressed_size[i]);
+        else{
+            dataOut=malloc(nbEle*sizeof(float));
+            memcpy(dataOut,compressed_output_pos,compressed_size[i]);
+
+        }
         //printf ("decomp %d end.\n", world_rank);
     
 //        float *dataOut = SZ_decomprescs(SZ_FLOAT, compressed_output_pos, compressed_size[i], r5, r4, r3, r2, r1);
