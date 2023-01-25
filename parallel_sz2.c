@@ -55,9 +55,20 @@ int main(int argc, char *argv[]) {
                                 "diffusivity_truncated.bin.dat"};
     double miranda_rel_bound[7] = {1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3};
 
+    int aramco_num_vars = 50;
+    char aramco_file[50][50];
+    double aramco_rel_bound[50];
+    for (int i=0;i<50;i++){
+        //char name[50];
+        sprintf(aramco_file[i],"aramco-snapshot-%d.f32",1000+10*i);
+        //salt_file[i]=name;
+        aramco_rel_bound[i]=1e-3;
+
+    }
 
 
-    char file[20][50];
+
+    char file[100][50];
     double *rel_bound;
     
     if (num_vars == hurricane_num_vars) {
@@ -66,7 +77,12 @@ int main(int argc, char *argv[]) {
     } else if (num_vars == miranda_num_vars) {
         for (int i = 0; i < num_vars; i++) strcpy(file[i], miranda_file[i]);
         rel_bound = miranda_rel_bound;
-    } else {
+    } 
+    else if (num_vars == aramco_num_vars) {
+        for (int i = 0; i < num_vars; i++) strcpy(file[i], aramco_file[i]);
+        rel_bound = aramco_rel_bound;
+    }
+    else {
         printf("No such variable, exit\n");
 //        SZ_Finalize();
         MPI_Finalize();
