@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=p2048_noc
+#SBATCH --job-name=p4096_noc
 #SBATCH -p bdwall
 #SBATCH -A ECP-EZ
 #SBATCH --nodes 128
