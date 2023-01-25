@@ -313,7 +313,7 @@ int main(int argc, char * argv[])
         if(eb>0)
             dataOut = SZ_decompress<float>(conf,(char*)compressed_output_pos, compressed_size[i]);
         else{
-            dataOut=malloc(nbEle*sizeof(float));
+            dataOut=(float *)malloc(nbEle*sizeof(float));
             memcpy(dataOut,compressed_output_pos,compressed_size[i]);
 
         }
